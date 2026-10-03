@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATELIER VESTT | Arena de Comissões, Metas & Gamificação Fashion</title>
+  <meta name="description" content="Sistema gamificado e inteligente de gestão de comissões, metas e ranking para lojas de moda e vestuário.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Chart.js & Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-icon">✨</div>
+        <div class="brand-text">
+          <span class="brand-name">ATELIER VESTT</span>
+          <span class="brand-tag">FASHION COMMISSIONS & GAMIFIED ARENA</span>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <div class="period-selector-wrapper">
+          <label for="periodSelect">📅 Mês de Análise:</label>
+          <select id="periodSelect" class="styled-select"></select>
+        </div>
+
+        <button id="btnOpenNewSaleModal" class="btn btn-gold pulse-btn">
+          <span>🛍️</span> Lançar Venda
+        </button>
+
+        <button id="btnOpenNewCampaignModal" class="btn btn-pink">
+          <span>🎯</span> Criar Campanha
+        </button>
+
+        <button id="btnResetSeed" class="btn btn-glass" title="Restaurar dados com 1 ano de exemplo">
+          <span>🔄</span> Restaurar Dados
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+
+    <!-- Active Seasonal Campaign Alert Ribbon -->
+    <div id="campaignBanner" class="campaign-ribbon" style="display: none;">
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-content">
+        <div class="ribbon-tag">🔥 CAMPANHA SAZONAL ATIVA</div>
+        <div class="ribbon-title" id="ribbonTitle">Primavera-Verão Alto Luxo 2027</div>
+        <div class="ribbon-desc" id="ribbonDesc">Bônus extra de +2.0% em todas as vendas! Aproveite para turbinar suas comissões!</div>
+      </div>
+      <div class="ribbon-badge" id="ribbonBadge">+2.0% BÔNUS</div>
+    </div>
+
+    <!-- Company Target Progress Bar (Metômetro da Loja) -->
+    <section class="company-goal-section glass-panel">
+      <div class="goal-header">
+        <div class="goal-title-area">
+          <span class="goal-pill">🎯 META GERAL DA EMPRESA</span>
+          <h2 id="companyGoalPeriodText">Desempenho Corporativo de Vendas</h2>
+          <p class="goal-subtitle">Quando a loja bate a meta geral, todos os vendedores ganham bônus multiplicador!</p>
+        </div>
+        <div class="goal-stats-summary">
+          <div class="goal-stat-item">
+            <span class="stat-label">Faturado no Mês</span>
+            <span class="stat-val highlight-gold" id="companyCurrentSales">R$ 0,00</span>
+          </div>
+          <div class="goal-stat-separator">/</div>
+          <div class="goal-stat-item">
+            <span class="stat-label">Meta Base</span>
+            <span class="stat-val" id="companyTargetSales">R$ 0,00</span>
+          </div>
+          <div class="goal-badge-percent" id="companyPercentBadge">0%</div>
+        </div>
+      </div>
+
+      <!-- Progress Track -->
+      <div class="progress-bar-container">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="companyProgressFill" style="width: 0%;">
+            <div class="progress-glow"></div>
+          </div>
+          <!-- Super Target Marker (125%) -->
+          <div class="super-target-marker" title="Super Meta: 125% com Super Bônus!">
+            <div class="marker-flag">🚀 Super Meta</div>
+          </div>
+        </div>
+        <div class="progress-legends">
+          <span>0%</span>
+          <span>50%</span>
+          <span>100% (Meta Conquistada 🎉)</span>
+          <span class="super-legend">125% (Super Bônus Equipe)</span>
+        </div>
+      </div>
+
+      <div class="goal-footer-status" id="companyGoalFooterStatus">
+        Calculando projeção do mês...
+      </div>
+    </section>
+
+    <!-- KPI Summary Row -->
+    <div class="kpi-grid">
+      <div class="kpi-card glass-panel">
+        <div class="kpi-icon gold-bg">💰</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Faturamento Total</span>
+          <h3 class="kpi-value" id="kpiTotalSales">R$ 0,00</h3>
+          <span class="kpi-sub" id="kpiSalesCount">0 vendas registradas</span>
+        </div>
+      </div>
+
+      <div class="kpi-card glass-panel">
+        <div class="kpi-icon emerald-bg">💎</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Comissões a Pagar</span>
+          <h3 class="kpi-value text-emerald" id="kpiTotalCommission">R$ 0,00</h3>
+          <span class="kpi-sub">Média de 4.8% por venda</span>
+        </div>
+      </div>
+
+      <div class="kpi-card glass-panel">
+        <div class="kpi-icon blue-bg">👗</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Ticket Médio de Moda</span>
+          <h3 class="kpi-value" id="kpiAvgTicket">R$ 0,00</h3>
+          <span class="kpi-sub">Valor médio por compra</span>
+        </div>
+      </div>
+
+      <div class="kpi-card glass-panel">
+        <div class="kpi-icon pink-bg">👑</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Líder do Mês</span>
+          <h3 class="kpi-value highlight-pink" id="kpiTopSeller">-</h3>
+          <span class="kpi-sub" id="kpiTopSellerTotal">Carregando...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="tab-ranking">
+        <span>🏆</span> Arena do Ranking & Pódio
+      </button>
+      <button class="tab-btn" data-tab="tab-analytics">
+        <span>📊</span> Gráficos & Evolução (12 Meses)
+      </button>
+      <button class="tab-btn" data-tab="tab-simulator">
+        <span>🎯</span> Metas Individuais & Simulador
+      </button>
+      <button class="tab-btn" data-tab="tab-campaigns">
+        <span>✨</span> Campanhas Sazonais
+      </button>
+      <button class="tab-btn" data-tab="tab-sales">
+        <span>📜</span> Histórico de Vendas
+      </button>
+    </div>
+
+    <!-- TAB 1: ARENA DO RANKING & PÓDIO GAMIFICADO -->
+    <section id="tab-ranking" class="tab-content active">
+      
+      <!-- Gamification Podium (Top 3) -->
+      <div class="podium-wrapper">
+        <div class="podium-header">
+          <h2>🏆 PÓDIO DAS ESTRELAS FASHION</h2>
+          <p>Os 3 consultores com maior faturamento no período atual</p>
+        </div>
+
+        <div class="podium-stage" id="podiumStage">
+          <!-- Dynamically filled with Silver (2nd), Gold (1st), Bronze (3rd) -->
+        </div>
+      </div>
+
+      <!-- Complete Ranking Table -->
+      <div class="glass-panel ranking-table-card">
+        <div class="ranking-table-header">
+          <h3>Classificação Geral da Equipe de Moda</h3>
+          <span class="live-tag">● ATUALIZADO EM TEMPO REAL</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="gamified-table">
+            <thead>
+              <tr>
+                <th>Posição</th>
+                <th>Consultor(a) de Vendas</th>
+                <th>Nível Fashion</th>
+                <th>Vendas Totais</th>
+                <th>Meta Individual</th>
+                <th>% Meta</th>
+                <th>Comissão Garantida</th>
+                <th>Badges & Conquistas</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="rankingTableBody">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: GRÁFICOS & ANALYTICS -->
+    <section id="tab-analytics" class="tab-content">
+      <div class="charts-grid">
+        <!-- 12-Month Sales & Commission Trend -->
+        <div class="chart-card glass-panel wide-card">
+          <div class="chart-header">
+            <div>
+              <h3>📈 Evolução de Vendas vs Comissões (12 Meses)</h3>
+              <p class="chart-sub">Histórico anual demonstrando picos sazonais (Black Friday, Natal, Dia das Mães)</p>
+            </div>
+            <div class="chart-legend-badge">1 Ano de Dados Integrados</div>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartHistory"></canvas>
+          </div>
+        </div>
+
+        <!-- Sales by Clothing Category -->
+        <div class="chart-card glass-panel">
+          <div class="chart-header">
+            <div>
+              <h3>👗 Faturamento por Categoria de Roupas</h3>
+              <p class="chart-sub">Quais departamentos mais geram vendas e comissões</p>
+            </div>
+          </div>
+          <div class="chart-wrapper donut-wrapper">
+            <canvas id="chartCategories"></canvas>
+          </div>
+        </div>
+
+        <!-- Sales by Seller Comparison -->
+        <div class="chart-card glass-panel">
+          <div class="chart-header">
+            <div>
+              <h3>👥 Comparativo de Vendas da Equipe</h3>
+              <p class="chart-sub">Volume de vendas por consultor no período</p>
+            </div>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartSellers"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: METAS INDIVIDUAIS & SIMULADOR DE COMISSÃO -->
+    <section id="tab-simulator" class="tab-content">
+      <div class="simulator-layout">
+        <!-- Left: Seller Selector & Goal Health -->
+        <div class="seller-details-card glass-panel">
+          <div class="form-group">
+            <label for="simulatorSellerSelect">Escolha o Consultor para Raio-X:</label>
+            <select id="simulatorSellerSelect" class="styled-select"></select>
+          </div>
+
+          <div id="sellerProfileArea" class="seller-profile-box">
+            <!-- Dynamic Seller Profile -->
+          </div>
+        </div>
+
+        <!-- Right: Interactive Next-Sale Simulator -->
+        <div class="interactive-simulator-card glass-panel">
+          <div class="sim-header">
+            <span class="sim-pill">⚡ SIMULADOR GAMIFICADO</span>
+            <h3>"E se eu vender mais?"</h3>
+            <p>Arraste o valor para simular quanto você vai colocar no bolso de comissão extra e como subirá no ranking!</p>
+          </div>
+
+          <div class="sim-controls">
+            <div class="slider-display">
+              <span class="slider-label">Venda Adicional Simulada:</span>
+              <span class="slider-val" id="simSliderVal">R$ 3.000,00</span>
+            </div>
+            <input type="range" id="simSlider" min="500" max="25000" step="500" value="3000" class="styled-range">
+            <div class="range-limits">
+              <span>+ R$ 500</span>
+              <span>+ R$ 12.500</span>
+              <span>+ R$ 25.000</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Simulator Result Card -->
+          <div class="sim-results-grid">
+            <div class="sim-result-box highlight-box">
+              <span class="res-title">Comissão Adicional</span>
+              <span class="res-value text-emerald" id="simExtraCommission">+ R$ 180,00</span>
+              <span class="res-note" id="simRateNote">Taxa base + bônus de campanha</span>
+            </div>
+            <div class="sim-result-box">
+              <span class="res-title">Novo Total Vendido</span>
+              <span class="res-value" id="simNewTotal">R$ 0,00</span>
+              <span class="res-note" id="simNewPercent">0% da Meta</span>
+            </div>
+            <div class="sim-result-box">
+              <span class="res-title">Projeção no Ranking</span>
+              <span class="res-value highlight-gold" id="simRankForecast">🥈 2º Lugar</span>
+              <span class="res-note" id="simRankDiff">Faltam R$ 450 para o 1º!</span>
+            </div>
+          </div>
+
+          <div class="sim-motivational-banner" id="simMotivationText">
+            🚀 Foco total! Você está muito perto de bater a sua meta e conquistar o bônus de superação!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: CAMPANHAS SAZONAIS -->
+    <section id="tab-campaigns" class="tab-content">
+      <div class="campaigns-header-row">
+        <div>
+          <h2>✨ Campanhas Sazonais & Aceleradores de Comissões</h2>
+          <p>Campanhas temáticas (Black Friday, Natal, Liquidações, Lançamentos de Coleção) com comissão extra para engajar a equipe.</p>
+        </div>
+        <button id="btnCreateCampaignTab" class="btn btn-pink">
+          <span>➕</span> Nova Campanha Sazonal
+        </button>
+      </div>
+
+      <div class="campaigns-grid" id="campaignsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- TAB 5: HISTÓRICO DE VENDAS -->
+    <section id="tab-sales" class="tab-content">
+      <div class="sales-filter-bar glass-panel">
+        <div class="filter-item">
+          <label>Vendedor:</label>
+          <select id="filterSeller" class="styled-select">
+            <option value="">Todos os Vendedores</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>Categoria de Roupa:</label>
+          <select id="filterCategory" class="styled-select">
+            <option value="">Todas as Categorias</option>
+          </select>
+        </div>
+        <div class="filter-item filter-btn-area">
+          <button id="btnApplySalesFilter" class="btn btn-gold">Filtrar</button>
+        </div>
+      </div>
+
+      <div class="glass-panel">
+        <div class="table-responsive">
+          <table class="gamified-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Data</th>
+                <th>Vendedor</th>
+                <th>Cliente</th>
+                <th>Categoria</th>
+                <th>Qtd</th>
+                <th>Valor da Peça</th>
+                <th>% Comissão</th>
+                <th>Comissão Vendedor</th>
+                <th>Campanha</th>
+              </tr>
+            </thead>
+            <tbody id="salesTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: REGISTRAR NOVA VENDA -->
+  <div id="modalNewSale" class="modal-backdrop">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <span class="modal-pill">🛍️ BALCÃO DE VENDAS</span>
+          <h3>Registrar Nova Venda de Moda</h3>
+        </div>
+        <button class="modal-close" id="btnCloseSaleModal">&times;</button>
+      </div>
+
+      <form id="formNewSale" class="modal-body">
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="saleSeller">Consultor de Vendas *</label>
+            <select id="saleSeller" class="styled-select" required></select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="saleCategory">Categoria da Peça *</label>
+            <select id="saleCategory" class="styled-select" required></select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="saleCustomer">Nome da Cliente</label>
+            <input type="text" id="saleCustomer" class="styled-input" placeholder="Ex: Fernanda Medeiros" value="Cliente VIP">
+          </div>
+          <div class="form-group flex-1">
+            <label for="salePayment">Forma de Pagamento</label>
+            <select id="salePayment" class="styled-select">
+              <option value="Cartão Crédito (3x)">Cartão Crédito (3x)</option>
+              <option value="Cartão Crédito (6x)">Cartão Crédito (6x)</option>
+              <option value="Pix (À vista)">Pix (À vista)</option>
+              <option value="Cartão Débito">Cartão Débito</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="saleAmount">Valor Total da Venda (R$) *</label>
+            <input type="number" id="saleAmount" class="styled-input text-lg" step="0.01" min="10" placeholder="Ex: 850.00" required>
+          </div>
+          <div class="form-group" style="width: 120px;">
+            <label for="saleItemsCount">Qtd Peças</label>
+            <input type="number" id="saleItemsCount" class="styled-input" value="1" min="1" max="50">
+          </div>
+        </div>
+
+        <!-- Live Instant Commission Calculation Preview -->
+        <div class="live-calc-box">
+          <div class="calc-row">
+            <span>Comissão Base do Vendedor:</span>
+            <span id="previewBaseRate">4.0%</span>
+          </div>
+          <div class="calc-row">
+            <span>Bônus Campanha Sazonal:</span>
+            <span id="previewBonusRate" class="text-pink">+2.0% (Ativa!)</span>
+          </div>
+          <div class="calc-divider"></div>
+          <div class="calc-row total-calc-row">
+            <span class="calc-total-label">Comissão a Receber nesta Venda:</span>
+            <span class="calc-total-val highlight-emerald" id="previewCommissionTotal">R$ 0,00</span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="btnCancelSale">Cancelar</button>
+          <button type="submit" class="btn btn-gold pulse-btn">
+            <span>🎉</span> Confirmar Venda & Creditar Comissão
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: NOVA CAMPANHA SAZONAL -->
+  <div id="modalNewCampaign" class="modal-backdrop">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <span class="modal-pill">✨ ACELERADOR DE VENDAS</span>
+          <h3>Criar Nova Campanha Sazonal</h3>
+        </div>
+        <button class="modal-close" id="btnCloseCampaignModal">&times;</button>
+      </div>
+
+      <form id="formNewCampaign" class="modal-body">
+        <div class="form-group">
+          <label for="campTitle">Título da Campanha *</label>
+          <input type="text" id="campTitle" class="styled-input" placeholder="Ex: Black Glamour Fashion, Liquidação Alto Inverno" required>
+        </div>
+
+        <div class="form-group">
+          <label for="campDesc">Descrição & Chamada Motivacional</label>
+          <input type="text" id="campDesc" class="styled-input" placeholder="Ex: Bônus especial para toda a equipe bater recorde!">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="campStart">Data Início *</label>
+            <input type="date" id="campStart" class="styled-input" required>
+          </div>
+          <div class="form-group flex-1">
+            <label for="campEnd">Data Término *</label>
+            <input type="date" id="campEnd" class="styled-input" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="campBonus">Comissão Bônus Extra (%) *</label>
+            <input type="number" id="campBonus" class="styled-input" step="0.1" min="0.5" max="10.0" value="2.0" required>
+          </div>
+          <div class="form-group flex-1">
+            <label for="campCategory">Categoria de Moda Alvo</label>
+            <select id="campCategory" class="styled-select">
+              <option value="TODAS">Loja Inteira (Todas as Peças)</option>
+              <option value="Vestidos & Festas">Vestidos & Festas</option>
+              <option value="Alfaiataria & Camisaria">Alfaiataria & Camisaria</option>
+              <option value="Jeans & Casual Chic">Jeans & Casual Chic</option>
+              <option value="Casacos & Tricot">Casacos & Tricot</option>
+              <option value="Moda Praia & Resort">Moda Praia & Resort</option>
+              <option value="Calçados & Bolsas de Couro">Calçados & Bolsas de Couro</option>
+              <option value="Acessórios & Semijoias">Acessórios & Semijoias</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="campColor">Cor do Tema</label>
+            <select id="campColor" class="styled-select">
+              <option value="#ec4899">Magenta Glamour (Rosa)</option>
+              <option value="#f59e0b">Dourado Champanhe</option>
+              <option value="#10b981">Verde Esmeralda</option>
+              <option value="#3b82f6">Azul Safira</option>
+              <option value="#8b5cf6">Roxo Real</option>
+              <option value="#111827">Preto Black Friday</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="campIcon">Ícone / Emote</label>
+            <select id="campIcon" class="styled-select">
+              <option value="🌸">🌸 Primavera / Verão</option>
+              <option value="❄️">❄️ Inverno & Tricot</option>
+              <option value="🖤">🖤 Black Friday</option>
+              <option value="🎄">🎄 Natal & Festas</option>
+              <option value="💎">💎 Alta Joalheria & Luxo</option>
+              <option value="🔥">🔥 Liquidação Queima Total</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="btnCancelCampaign">Cancelar</button>
+          <button type="submit" class="btn btn-pink">Lançar Campanha</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: DETALHES DO VENDEDOR -->
+  <div id="modalSellerDetails" class="modal-backdrop">
+    <div class="modal-card glass-panel wide-modal">
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <span class="modal-pill">👑 PERFIL FASHION</span>
+          <h3 id="modalSellerName">Detalhes do Consultor</h3>
+        </div>
+        <button class="modal-close" id="btnCloseSellerModal">&times;</button>
+      </div>
+
+      <div class="modal-body" id="modalSellerBody">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Celebration Audio Ping & Notification Toast -->
+  <div id="toastNotification" class="toast-popup">
+    <div class="toast-icon" id="toastIcon">🎉</div>
+    <div class="toast-content">
+      <div class="toast-title" id="toastTitle">Venda Registrada!</div>
+      <div class="toast-msg" id="toastMsg">Comissão de R$ 120 creditada.</div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/charts.js"></script>
+  <script src="js/gamification.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
