@@ -2131,10 +2131,7 @@ body {
   border: 1px solid rgba(6, 182, 212, 0.3);
 }
 
-/* Admin Tab — only visible for admin */
-.admin-only-tab {
-  display: none; /* hidden by default, shown via JS for admin */
-}
+/* Admin Tab — visibility handled entirely by JS (applyRolePermissions) */
 
 /* btn-pink for Reset Password action */
 .btn-pink {
