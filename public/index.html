@@ -415,27 +415,86 @@
 
     <!-- TAB 6: GESTÃO DE USUÁRIOS & ACESSOS (ADMIN ONLY) -->
     <section id="tab-users" class="tab-content">
+      <!-- Admin Security Header Badge -->
+      <div class="admin-panel-badge-bar glass-panel">
+        <div class="admin-badge-content">
+          <span class="admin-lock-icon">🛡️</span>
+          <div>
+            <h2 class="admin-panel-title">Painel de Administração de Usuários & Credenciais</h2>
+            <p class="admin-panel-subtitle">Área restrita exclusivamente a administradores do Atelier Vestt. Gerencie colaboradores, altere níveis de acesso, redefina senhas e remova acessos.</p>
+          </div>
+        </div>
+        <div class="admin-security-pill">🔒 ACESSO RESTRITO (ADMIN ONLY)</div>
+      </div>
+
+      <!-- Admin Users Metrics Cards -->
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card glass-panel">
+          <div class="stat-icon-circ gold-bg">👥</div>
+          <div>
+            <span class="stat-lbl">Total de Usuários</span>
+            <h3 class="stat-num" id="statTotalUsers">0</h3>
+            <span class="stat-tag">Contas ativas</span>
+          </div>
+        </div>
+        <div class="admin-stat-card glass-panel">
+          <div class="stat-icon-circ emerald-bg">🛡️</div>
+          <div>
+            <span class="stat-lbl">Administradores</span>
+            <h3 class="stat-num text-gold" id="statAdminUsers">0</h3>
+            <span class="stat-tag">Acesso total</span>
+          </div>
+        </div>
+        <div class="admin-stat-card glass-panel">
+          <div class="stat-icon-circ blue-bg">💼</div>
+          <div>
+            <span class="stat-lbl">Funcionários / Consultores</span>
+            <h3 class="stat-num text-cyan" id="statEmployeeUsers">0</h3>
+            <span class="stat-tag">Painel de vendas</span>
+          </div>
+        </div>
+        <div class="admin-stat-card glass-panel">
+          <div class="stat-icon-circ pink-bg">👗</div>
+          <div>
+            <span class="stat-lbl">Vendedores Vinculados</span>
+            <h3 class="stat-num text-pink" id="statLinkedSellers">0</h3>
+            <span class="stat-tag">Com perfil na loja</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users Management Table Panel -->
       <div class="glass-panel">
         <div class="users-table-header">
-          <div>
-            <h3>👥 Gestão de Usuários & Níveis de Acesso</h3>
-            <p class="chart-sub">Controle de credenciais, administradores e vínculos com consultores da equipe de moda.</p>
+          <div class="users-search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="inputSearchUsers" class="styled-input users-search-input" placeholder="Buscar por nome ou login...">
           </div>
-          <button id="btnOpenNewUserModal" class="btn btn-gold">
-            <span>➕</span> Cadastrar Novo Usuário
-          </button>
+          <div class="users-filter-group">
+            <select id="selectRoleFilter" class="styled-select users-role-select">
+              <option value="all">Todos os Níveis</option>
+              <option value="admin">🛡️ Apenas Administradores</option>
+              <option value="employee">💼 Apenas Funcionários</option>
+            </select>
+            <button id="btnOpenNewUserModal" class="btn btn-gold">
+              <span>➕</span> Novo Usuário
+            </button>
+            <button id="btnRefreshUsersList" class="btn btn-glass" title="Recarregar lista">
+              <span>🔄</span> Atualizar
+            </button>
+          </div>
         </div>
 
         <div class="table-responsive">
           <table class="gamified-table">
             <thead>
               <tr>
-                <th>Avatar</th>
                 <th>Usuário</th>
                 <th>Nome Completo</th>
                 <th>Nível de Acesso</th>
                 <th>Vendedor Vinculado</th>
                 <th>Data Cadastro</th>
+                <th style="text-align: right; min-width: 190px;">Ações de Gestão</th>
               </tr>
             </thead>
             <tbody id="usersTableBody">
@@ -722,6 +781,96 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-glass" id="btnCancelNewUser">Cancelar</button>
           <button type="submit" class="btn btn-gold">Criar Usuário</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EDITAR USUÁRIO (ADMIN) -->
+  <div id="modalEditUser" class="modal-backdrop">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <span class="modal-pill">✏️ EDITAR USUÁRIO</span>
+          <h3 id="editUserModalTitle">Editar Dados do Colaborador</h3>
+        </div>
+        <button class="modal-close" id="btnCloseEditUserModal">&times;</button>
+      </div>
+
+      <form id="formEditUser" class="modal-body">
+        <input type="hidden" id="editUserId">
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="editUserUsername">Nome de Usuário (Login) *</label>
+            <input type="text" id="editUserUsername" class="styled-input" required>
+          </div>
+          <div class="form-group flex-1">
+            <label for="editUserRole">Nível de Acesso (Cargo) *</label>
+            <select id="editUserRole" class="styled-select" required>
+              <option value="employee">💼 Funcionário / Consultor de Vendas</option>
+              <option value="admin">🛡️ Administrador (Acesso Total)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="editUserName">Nome Completo *</label>
+          <input type="text" id="editUserName" class="styled-input" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="editUserSellerId">Vendedor Vinculado</label>
+            <select id="editUserSellerId" class="styled-select">
+              <option value="">Nenhum vínculo (Geral / Diretoria)</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="editUserPassword">Nova Senha (Opcional)</label>
+            <input type="password" id="editUserPassword" class="styled-input" placeholder="Deixe em branco para manter">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="btnCancelEditUser">Cancelar</button>
+          <button type="submit" class="btn btn-gold">💾 Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: REDEFINIR SENHA RÁPIDA (ADMIN) -->
+  <div id="modalResetUserPwd" class="modal-backdrop">
+    <div class="modal-card glass-panel" style="max-width: 440px;">
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <span class="modal-pill">🔑 SEGURANÇA</span>
+          <h3>Redefinir Senha de Acesso</h3>
+        </div>
+        <button class="modal-close" id="btnCloseResetPwdModal">&times;</button>
+      </div>
+
+      <form id="formResetUserPwd" class="modal-body">
+        <input type="hidden" id="resetPwdUserId">
+
+        <div style="background: rgba(255,255,255,0.04); padding: 0.85rem; border-radius: var(--radius-md); margin-bottom: 1rem; border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted);">COLABORADOR SELECIONADO:</div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: #fff;" id="resetPwdTargetName">-</div>
+          <div style="font-size: 0.78rem; color: var(--gold-400);" id="resetPwdTargetUsername">@-</div>
+        </div>
+
+        <div class="form-group">
+          <label for="resetPwdNewPassword">Nova Senha *</label>
+          <div class="input-password-wrapper">
+            <input type="text" id="resetPwdNewPassword" class="styled-input" placeholder="Digite a nova senha" required minlength="4">
+            <button type="button" id="btnGenRandomPwd" class="btn btn-xs btn-glass" style="position: absolute; right: 0.5rem;" title="Gerar senha temporária">🎲 Gerar</button>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="btnCancelResetPwd">Cancelar</button>
+          <button type="submit" class="btn btn-pink">🔑 Confirmar Nova Senha</button>
         </div>
       </form>
     </div>

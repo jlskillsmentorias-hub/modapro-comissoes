@@ -257,6 +257,119 @@ app.post('/api/auth/users', requireAdmin, (req, res) => {
   }
 });
 
+// Update user (Admin only)
+app.put('/api/auth/users/:id', requireAdmin, (req, res) => {
+  try {
+    const userId = Number(req.params.id);
+    const { username, name, role, seller_id, password } = req.body;
+
+    const existing = db.prepare('SELECT * FROM users WHERE id = ?').get(userId);
+    if (!existing) return res.status(404).json({ error: 'Usuário não encontrado.' });
+
+    if (!username || !name || !role) {
+      return res.status(400).json({ error: 'Nome, login e nível de acesso são obrigatórios.' });
+    }
+
+    if (!['admin', 'employee'].includes(role)) {
+      return res.status(400).json({ error: 'Nível de acesso inválido. Use "admin" ou "employee".' });
+    }
+
+    // Prevent demoting the last administrator
+    if (existing.role === 'admin' && role !== 'admin') {
+      const adminCount = db.prepare("SELECT COUNT(*) as count FROM users WHERE role = 'admin'").get().count;
+      if (adminCount <= 1) {
+        return res.status(400).json({ error: 'Não é permitido remover o único administrador do sistema.' });
+      }
+    }
+
+    let avatar = existing.avatar;
+    if (seller_id) {
+      const seller = db.prepare('SELECT avatar FROM sellers WHERE id = ?').get(seller_id);
+      if (seller) avatar = seller.avatar;
+    }
+
+    if (password && password.trim().length > 0) {
+      const salt = crypto.randomBytes(16).toString('hex');
+      const hash = hashPassword(password.trim(), salt);
+      db.prepare(`
+        UPDATE users 
+        SET username = ?, name = ?, role = ?, seller_id = ?, avatar = ?, password_hash = ?, salt = ?
+        WHERE id = ?
+      `).run(username.trim().toLowerCase(), name.trim(), role, seller_id || null, avatar, hash, salt, userId);
+      // Invalidate sessions on password change
+      db.prepare('DELETE FROM sessions WHERE user_id = ?').run(userId);
+    } else {
+      db.prepare(`
+        UPDATE users 
+        SET username = ?, name = ?, role = ?, seller_id = ?, avatar = ?
+        WHERE id = ?
+      `).run(username.trim().toLowerCase(), name.trim(), role, seller_id || null, avatar, userId);
+    }
+
+    res.json({ success: true, message: 'Usuário atualizado com sucesso!' });
+  } catch (error) {
+    if (error.message.includes('UNIQUE constraint failed')) {
+      return res.status(409).json({ error: 'Este nome de usuário já pertence a outra conta.' });
+    }
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Quick reset user password (Admin only)
+app.patch('/api/auth/users/:id/password', requireAdmin, (req, res) => {
+  try {
+    const userId = Number(req.params.id);
+    const { new_password } = req.body;
+
+    if (!new_password || new_password.trim().length < 4) {
+      return res.status(400).json({ error: 'A nova senha deve possuir no mínimo 4 caracteres.' });
+    }
+
+    const user = db.prepare('SELECT id, name FROM users WHERE id = ?').get(userId);
+    if (!user) return res.status(404).json({ error: 'Usuário não encontrado.' });
+
+    const salt = crypto.randomBytes(16).toString('hex');
+    const hash = hashPassword(new_password.trim(), salt);
+
+    db.prepare('UPDATE users SET password_hash = ?, salt = ? WHERE id = ?').run(hash, salt, userId);
+    db.prepare('DELETE FROM sessions WHERE user_id = ?').run(userId);
+
+    res.json({ success: true, message: `Senha de ${user.name} redefinida com sucesso!` });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete user (Admin only)
+app.delete('/api/auth/users/:id', requireAdmin, (req, res) => {
+  try {
+    const userId = Number(req.params.id);
+
+    // Safeguard 1: cannot delete own account
+    if (req.user && req.user.id === userId) {
+      return res.status(400).json({ error: 'Você não pode excluir sua própria conta conectada.' });
+    }
+
+    const user = db.prepare('SELECT * FROM users WHERE id = ?').get(userId);
+    if (!user) return res.status(404).json({ error: 'Usuário não encontrado.' });
+
+    // Safeguard 2: cannot delete the last administrator
+    if (user.role === 'admin') {
+      const adminCount = db.prepare("SELECT COUNT(*) as count FROM users WHERE role = 'admin'").get().count;
+      if (adminCount <= 1) {
+        return res.status(400).json({ error: 'Não é permitido excluir o único administrador do sistema.' });
+      }
+    }
+
+    db.prepare('DELETE FROM sessions WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM users WHERE id = ?').run(userId);
+
+    res.json({ success: true, message: `Usuário ${user.name} (@${user.username}) excluído com sucesso.` });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // 1. Dashboard Summary
 app.get('/api/dashboard', (req, res) => {
   try {

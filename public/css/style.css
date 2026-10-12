@@ -1892,3 +1892,261 @@ body {
   gap: 0.35rem;
 }
 
+/* ==========================================================================
+   ADMIN USERS MANAGEMENT DASHBOARD STYLES
+   ========================================================================== */
+
+.admin-panel-badge-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.12) 0%, rgba(18, 24, 40, 0.85) 100%);
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-badge-content {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.admin-lock-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5));
+}
+
+.admin-panel-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.admin-panel-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 750px;
+  line-height: 1.4;
+  margin-top: 0.2rem;
+}
+
+.admin-security-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+/* Admin Users Stats Cards */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-stat-card {
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  transition: var(--transition);
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.stat-icon-circ {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.stat-lbl {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-num {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0.15rem 0;
+}
+
+.stat-tag {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+/* Toolbar & Search */
+.users-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-glass);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.users-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 380px;
+}
+
+.users-search-wrapper .search-icon {
+  position: absolute;
+  left: 0.85rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.users-search-input {
+  width: 100%;
+  padding-left: 2.3rem;
+  font-size: 0.85rem;
+}
+
+.users-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.users-role-select {
+  min-width: 175px;
+  font-size: 0.85rem;
+}
+
+/* Action buttons in Table */
+.action-buttons-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
+.btn-action {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.btn-action-edit {
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.btn-action-edit:hover {
+  background: rgba(59, 130, 246, 0.3);
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+.btn-action-pwd {
+  background: rgba(236, 72, 153, 0.15);
+  color: #f472b6;
+  border-color: rgba(236, 72, 153, 0.3);
+}
+
+.btn-action-pwd:hover {
+  background: rgba(236, 72, 153, 0.3);
+  color: #fff;
+  border-color: #ec4899;
+}
+
+.btn-action-del {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.btn-action-del:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.btn-action-del:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* User Role Badges (Admin Panel Table) */
+.user-badge-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.user-badge-admin {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.user-badge-employee {
+  background: rgba(6, 182, 212, 0.15);
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+/* Admin Tab — only visible for admin */
+.admin-only-tab {
+  display: none; /* hidden by default, shown via JS for admin */
+}
+
+/* btn-pink for Reset Password action */
+.btn-pink {
+  background: linear-gradient(135deg, #ec4899, #f472b6);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+}
+
+.btn-pink:hover {
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.55);
+  transform: translateY(-1px);
+}

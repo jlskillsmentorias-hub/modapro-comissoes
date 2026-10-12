@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedSellerForSim: null,
     currentUser: null,
     authToken: localStorage.getItem('atelier_token') || null,
-    demoUsers: []
+    demoUsers: [],
+    allUsers: []
   };
 
   const { sfx, triggerConfetti, showToast, formatCurrency } = window.gamification;
@@ -71,6 +72,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCancelNewUser = document.getElementById('btnCancelNewUser');
   const formNewUser = document.getElementById('formNewUser');
   const newUserSellerId = document.getElementById('newUserSellerId');
+
+  // User Management Admin Panel DOM Elements
+  const statTotalUsers = document.getElementById('statTotalUsers');
+  const statAdminUsers = document.getElementById('statAdminUsers');
+  const statEmployeeUsers = document.getElementById('statEmployeeUsers');
+  const statLinkedSellers = document.getElementById('statLinkedSellers');
+
+  const inputSearchUsers = document.getElementById('inputSearchUsers');
+  const selectRoleFilter = document.getElementById('selectRoleFilter');
+  const btnRefreshUsersList = document.getElementById('btnRefreshUsersList');
+
+  const modalEditUser = document.getElementById('modalEditUser');
+  const formEditUser = document.getElementById('formEditUser');
+  const editUserId = document.getElementById('editUserId');
+  const editUserUsername = document.getElementById('editUserUsername');
+  const editUserName = document.getElementById('editUserName');
+  const editUserRole = document.getElementById('editUserRole');
+  const editUserSellerId = document.getElementById('editUserSellerId');
+  const editUserPassword = document.getElementById('editUserPassword');
+  const btnCloseEditUserModal = document.getElementById('btnCloseEditUserModal');
+  const btnCancelEditUser = document.getElementById('btnCancelEditUser');
+
+  const modalResetUserPwd = document.getElementById('modalResetUserPwd');
+  const formResetUserPwd = document.getElementById('formResetUserPwd');
+  const resetPwdUserId = document.getElementById('resetPwdUserId');
+  const resetPwdTargetName = document.getElementById('resetPwdTargetName');
+  const resetPwdTargetUsername = document.getElementById('resetPwdTargetUsername');
+  const resetPwdNewPassword = document.getElementById('resetPwdNewPassword');
+  const btnGenRandomPwd = document.getElementById('btnGenRandomPwd');
+  const btnCloseResetPwdModal = document.getElementById('btnCloseResetPwdModal');
+  const btnCancelResetPwd = document.getElementById('btnCancelResetPwd');
 
   const sellerLockNotice = document.getElementById('sellerLockNotice');
   const filterMySalesWrapper = document.getElementById('filterMySalesWrapper');
@@ -343,22 +375,233 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function fetchUsersList() {
-    if (!usersTableBody || !state.currentUser || state.currentUser.role !== 'admin') return;
+    if (!state.currentUser || state.currentUser.role !== 'admin') return;
     try {
       const res = await apiRequest('/api/auth/users');
       const users = await res.json();
-      usersTableBody.innerHTML = users.map(u => `
-        <tr>
-          <td><img src="${u.avatar}" style="width:34px; height:34px; border-radius:50%; object-fit:cover;"></td>
-          <td><strong>${u.username}</strong></td>
-          <td>${u.name}</td>
-          <td><span class="${u.role === 'admin' ? 'user-badge-admin' : 'user-badge-employee'} user-badge-role">${u.role === 'admin' ? '🛡️ Administrador' : '💼 Funcionário'}</span></td>
-          <td>${u.seller_name ? `${u.seller_name} (${u.seller_nickname})` : '<span style="color:var(--text-dim);">Geral / Diretoria</span>'}</td>
-          <td>${u.created_at ? u.created_at.substring(0, 10) : '-'}</td>
-        </tr>
-      `).join('');
+      state.allUsers = users;
+
+      // Update Metric Counters
+      const total = users.length;
+      const admins = users.filter(u => u.role === 'admin').length;
+      const employees = users.filter(u => u.role === 'employee').length;
+      const linked = users.filter(u => u.seller_id).length;
+
+      if (statTotalUsers) statTotalUsers.textContent = total;
+      if (statAdminUsers) statAdminUsers.textContent = admins;
+      if (statEmployeeUsers) statEmployeeUsers.textContent = employees;
+      if (statLinkedSellers) statLinkedSellers.textContent = linked;
+
+      renderUsersTable();
     } catch (e) {
       console.error('Error fetching users:', e);
+    }
+  }
+
+  function renderUsersTable() {
+    if (!usersTableBody) return;
+
+    const searchTerm = (inputSearchUsers ? inputSearchUsers.value.trim().toLowerCase() : '');
+    const roleFilter = (selectRoleFilter ? selectRoleFilter.value : 'all');
+
+    const filtered = state.allUsers.filter(u => {
+      const matchesSearch = !searchTerm || 
+        u.name.toLowerCase().includes(searchTerm) || 
+        u.username.toLowerCase().includes(searchTerm) ||
+        (u.seller_name && u.seller_name.toLowerCase().includes(searchTerm));
+      
+      const matchesRole = roleFilter === 'all' || u.role === roleFilter;
+
+      return matchesSearch && matchesRole;
+    });
+
+    if (filtered.length === 0) {
+      usersTableBody.innerHTML = `
+        <tr>
+          <td colspan="6" style="text-align:center; padding: 2.5rem; color: var(--text-dim);">
+            🔍 Nenhum usuário encontrado com os filtros aplicados.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    usersTableBody.innerHTML = filtered.map(u => {
+      const isSelf = state.currentUser && state.currentUser.id === u.id;
+      return `
+        <tr>
+          <td>
+            <div style="display:flex; align-items:center; gap:0.65rem;">
+              <img src="${u.avatar}" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border: 2px solid ${u.role === 'admin' ? 'var(--gold-500)' : 'var(--cyan-500)'};">
+              <div>
+                <strong style="color: #fff; display:block;">@${u.username}</strong>
+                ${isSelf ? '<span style="font-size:0.65rem; color:var(--gold-400); font-weight:700;">● VOCÊ (SESSÃO ATUAL)</span>' : ''}
+              </div>
+            </div>
+          </td>
+          <td><span style="font-weight:600;">${u.name}</span></td>
+          <td>
+            <span class="${u.role === 'admin' ? 'user-badge-admin' : 'user-badge-employee'} user-badge-role">
+              ${u.role === 'admin' ? '🛡️ Administrador' : '💼 Funcionário'}
+            </span>
+          </td>
+          <td>
+            ${u.seller_name ? `
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <span>👗</span>
+                <span>${u.seller_name} <small style="color:var(--gold-400);">(${u.seller_nickname})</small></span>
+              </div>
+            ` : '<span style="color:var(--text-dim);">Diretoria Geral / Sem vínculo</span>'}
+          </td>
+          <td>${u.created_at ? u.created_at.substring(0, 10) : '-'}</td>
+          <td style="text-align: right;">
+            <div class="action-buttons-cell">
+              <button class="btn-action btn-action-edit btn-edit-user" data-id="${u.id}" title="Editar informações do colaborador">
+                ✏️ Editar
+              </button>
+              <button class="btn-action btn-action-pwd btn-reset-pwd" data-id="${u.id}" title="Redefinir senha de acesso">
+                🔑 Senha
+              </button>
+              <button class="btn-action btn-action-del btn-del-user" data-id="${u.id}" data-name="${u.name}" data-role="${u.role}" ${isSelf ? 'disabled title="Você não pode excluir a si mesmo"' : 'title="Excluir usuário"'}>
+                🗑️ Excluir
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    // Attach row action listeners
+    usersTableBody.querySelectorAll('.btn-edit-user').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = Number(btn.getAttribute('data-id'));
+        const user = state.allUsers.find(u => u.id === id);
+        if (user) openEditUserModal(user);
+      });
+    });
+
+    usersTableBody.querySelectorAll('.btn-reset-pwd').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = Number(btn.getAttribute('data-id'));
+        const user = state.allUsers.find(u => u.id === id);
+        if (user) openResetPwdModal(user);
+      });
+    });
+
+    usersTableBody.querySelectorAll('.btn-del-user').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = Number(btn.getAttribute('data-id'));
+        const name = btn.getAttribute('data-name');
+        const role = btn.getAttribute('data-role');
+        handleDeleteUser(id, name, role);
+      });
+    });
+  }
+
+  function openEditUserModal(user) {
+    if (!modalEditUser) return;
+    editUserId.value = user.id;
+    editUserUsername.value = user.username;
+    editUserName.value = user.name;
+    editUserRole.value = user.role;
+    editUserSellerId.value = user.seller_id || '';
+    editUserPassword.value = '';
+    document.getElementById('editUserModalTitle').textContent = `Editar Colaborador: ${user.name}`;
+    openModal(modalEditUser);
+  }
+
+  async function handleEditUserSubmit(e) {
+    e.preventDefault();
+    const id = Number(editUserId.value);
+    const username = editUserUsername.value.trim();
+    const name = editUserName.value.trim();
+    const role = editUserRole.value;
+    const seller_id = editUserSellerId.value ? Number(editUserSellerId.value) : null;
+    const password = editUserPassword.value;
+
+    try {
+      const res = await apiRequest(`/api/auth/users/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, name, role, seller_id, password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao atualizar usuário');
+
+      closeModal(modalEditUser);
+      showToast('Usuário Atualizado!', `Dados de ${name} salvos com sucesso.`, '💾');
+      await fetchUsersList();
+      await loadDemoUsers();
+
+      // If user edited their own profile, refresh session
+      if (state.currentUser && state.currentUser.id === id) {
+        state.currentUser.name = name;
+        state.currentUser.username = username;
+        state.currentUser.role = role;
+        state.currentUser.seller_id = seller_id;
+        applyRolePermissions();
+      }
+    } catch (err) {
+      alert('Erro: ' + err.message);
+    }
+  }
+
+  function openResetPwdModal(user) {
+    if (!modalResetUserPwd) return;
+    resetPwdUserId.value = user.id;
+    resetPwdTargetName.textContent = user.name;
+    resetPwdTargetUsername.textContent = `@${user.username}`;
+    resetPwdNewPassword.value = '';
+    openModal(modalResetUserPwd);
+  }
+
+  async function handleResetPwdSubmit(e) {
+    e.preventDefault();
+    const id = Number(resetPwdUserId.value);
+    const new_password = resetPwdNewPassword.value;
+
+    try {
+      const res = await apiRequest(`/api/auth/users/${id}/password`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ new_password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao redefinir senha');
+
+      closeModal(modalResetUserPwd);
+      showToast('Senha Redefinida!', data.message || 'Nova senha definida com sucesso.', '🔑');
+    } catch (err) {
+      alert('Erro: ' + err.message);
+    }
+  }
+
+  function generateRandomPassword() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+    let pwd = 'Vestt';
+    for (let i = 0; i < 4; i++) {
+      pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    pwd += '@';
+    resetPwdNewPassword.value = pwd;
+    resetPwdNewPassword.select();
+  }
+
+  async function handleDeleteUser(userId, name, role) {
+    if (!confirm(`⚠️ Tem certeza de que deseja excluir o acesso do usuário "${name}"?\nEsta ação revogará imediatamente o login e não poderá ser desfeita.`)) {
+      return;
+    }
+
+    try {
+      const res = await apiRequest(`/api/auth/users/${userId}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao excluir usuário');
+
+      showToast('Acesso Removido', `O usuário ${name} foi excluído do sistema.`, '🗑️');
+      await fetchUsersList();
+      await loadDemoUsers();
+    } catch (err) {
+      alert('Erro: ' + err.message);
     }
   }
 
@@ -396,11 +639,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab');
+
+        // Security check for Users tab
+        if (targetId === 'tab-users') {
+          if (!state.currentUser || state.currentUser.role !== 'admin') {
+            showToast('Acesso Restrito', 'Apenas administradores podem acessar a Gestão de Usuários.', '🔒');
+            return;
+          }
+        }
+
         tabBtns.forEach(b => b.classList.remove('active'));
         tabContents.forEach(c => c.classList.remove('active'));
 
         btn.classList.add('active');
-        const targetId = btn.getAttribute('data-tab');
         const targetContent = document.getElementById(targetId);
         if (targetContent) {
           targetContent.classList.add('active');
@@ -465,6 +717,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnCloseNewUserModal) btnCloseNewUserModal.addEventListener('click', () => closeModal(modalNewUser));
     if (btnCancelNewUser) btnCancelNewUser.addEventListener('click', () => closeModal(modalNewUser));
     if (formNewUser) formNewUser.addEventListener('submit', handleNewUserSubmit);
+
+    // Edit User Modal (Admin)
+    if (btnCloseEditUserModal) btnCloseEditUserModal.addEventListener('click', () => closeModal(modalEditUser));
+    if (btnCancelEditUser) btnCancelEditUser.addEventListener('click', () => closeModal(modalEditUser));
+    if (formEditUser) formEditUser.addEventListener('submit', handleEditUserSubmit);
+
+    // Reset Password Modal (Admin)
+    if (btnCloseResetPwdModal) btnCloseResetPwdModal.addEventListener('click', () => closeModal(modalResetUserPwd));
+    if (btnCancelResetPwd) btnCancelResetPwd.addEventListener('click', () => closeModal(modalResetUserPwd));
+    if (formResetUserPwd) formResetUserPwd.addEventListener('submit', handleResetPwdSubmit);
+    if (btnGenRandomPwd) btnGenRandomPwd.addEventListener('click', generateRandomPassword);
+
+    // User Admin Search & Filters
+    if (inputSearchUsers) inputSearchUsers.addEventListener('input', renderUsersTable);
+    if (selectRoleFilter) selectRoleFilter.addEventListener('change', renderUsersTable);
+    if (btnRefreshUsersList) btnRefreshUsersList.addEventListener('click', fetchUsersList);
 
     // Only My Sales filter
     if (chkOnlyMySales) {
@@ -845,6 +1113,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (newUserSellerId) {
       newUserSellerId.innerHTML = `<option value="">Nenhum vínculo (Geral / Diretoria)</option>` +
+        ranking.map(r => `<option value="${r.id}">${r.name} (${r.nickname})</option>`).join('');
+    }
+
+    if (editUserSellerId) {
+      editUserSellerId.innerHTML = `<option value="">Nenhum vínculo (Geral / Diretoria)</option>` +
         ranking.map(r => `<option value="${r.id}">${r.name} (${r.nickname})</option>`).join('');
     }
 
