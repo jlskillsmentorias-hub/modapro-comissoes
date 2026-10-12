@@ -33,7 +33,7 @@
 
       <div class="nav-controls">
         <div class="period-selector-wrapper">
-          <label for="periodSelect">📅 Mês de Análise:</label>
+          <label for="periodSelect">📅 Mês:</label>
           <select id="periodSelect" class="styled-select"></select>
         </div>
 
@@ -48,9 +48,29 @@
         <button id="btnResetSeed" class="btn btn-glass" title="Restaurar dados com 1 ano de exemplo">
           <span>🔄</span> Restaurar Dados
         </button>
+
+        <!-- User Profile Capsule -->
+        <div class="user-capsule" id="navUserCapsule">
+          <img id="navUserAvatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=250&q=80" alt="Avatar" class="user-avatar-tiny avatar-admin">
+          <div class="user-capsule-info">
+            <span class="user-capsule-name" id="navUserName">Admin</span>
+            <span class="badge-role badge-admin" id="navUserRole">🛡️ Admin</span>
+          </div>
+          <button id="btnSwitchUser" class="btn btn-xs btn-glass" title="Alternar usuário de teste">🔄 Trocar</button>
+          <button id="btnLogout" class="btn btn-xs btn-glass-danger" title="Sair do sistema">🚪 Sair</button>
+        </div>
       </div>
     </div>
   </header>
+
+  <!-- Role Access Level Banner -->
+  <div class="role-access-banner role-banner-admin" id="roleAccessBanner">
+    <div class="role-banner-content">
+      <span class="role-banner-icon" id="roleBannerIcon">🛡️</span>
+      <span class="role-banner-text" id="roleBannerText">Modo Administrador Ativo: Acesso irrestrito a faturamento geral, campanhas sazonais e configurações.</span>
+    </div>
+    <div class="role-banner-badge" id="roleBannerBadge">ADMINISTRADOR</div>
+  </div>
 
   <!-- Main Container -->
   <main class="main-content">
@@ -167,6 +187,9 @@
       </button>
       <button class="tab-btn" data-tab="tab-sales">
         <span>📜</span> Histórico de Vendas
+      </button>
+      <button class="tab-btn admin-only-tab" id="tabBtnUsers" data-tab="tab-users">
+        <span>👥</span> Usuários & Acessos
       </button>
     </div>
 
@@ -354,6 +377,12 @@
             <option value="">Todas as Categorias</option>
           </select>
         </div>
+        <div class="filter-item" id="filterMySalesWrapper" style="display: none; align-self: flex-end; padding-bottom: 0.25rem;">
+          <label class="checkbox-wrapper" style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+            <input type="checkbox" id="chkOnlyMySales">
+            <span style="font-size: 0.8rem; color: #67e8f9; font-weight: 600;">👤 Apenas Minhas Vendas</span>
+          </label>
+        </div>
         <div class="filter-item filter-btn-area">
           <button id="btnApplySalesFilter" class="btn btn-gold">Filtrar</button>
         </div>
@@ -384,6 +413,39 @@
       </div>
     </section>
 
+    <!-- TAB 6: GESTÃO DE USUÁRIOS & ACESSOS (ADMIN ONLY) -->
+    <section id="tab-users" class="tab-content">
+      <div class="glass-panel">
+        <div class="users-table-header">
+          <div>
+            <h3>👥 Gestão de Usuários & Níveis de Acesso</h3>
+            <p class="chart-sub">Controle de credenciais, administradores e vínculos com consultores da equipe de moda.</p>
+          </div>
+          <button id="btnOpenNewUserModal" class="btn btn-gold">
+            <span>➕</span> Cadastrar Novo Usuário
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="gamified-table">
+            <thead>
+              <tr>
+                <th>Avatar</th>
+                <th>Usuário</th>
+                <th>Nome Completo</th>
+                <th>Nível de Acesso</th>
+                <th>Vendedor Vinculado</th>
+                <th>Data Cadastro</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- MODAL: REGISTRAR NOVA VENDA -->
@@ -402,6 +464,9 @@
           <div class="form-group flex-1">
             <label for="saleSeller">Consultor de Vendas *</label>
             <select id="saleSeller" class="styled-select" required></select>
+            <div id="sellerLockNotice" class="seller-lock-notice" style="display: none;">
+              <span>🔒</span> Venda vinculada automaticamente ao seu usuário.
+            </div>
           </div>
           <div class="form-group flex-1">
             <label for="saleCategory">Categoria da Peça *</label>
@@ -563,6 +628,102 @@
       <div class="modal-body" id="modalSellerBody">
         <!-- Rendered dynamically -->
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LOGIN & ACESSO AO SISTEMA -->
+  <div id="modalLogin" class="modal-backdrop login-backdrop">
+    <div class="modal-card glass-panel login-card">
+      <div class="login-header-hero">
+        <div class="login-logo-glow">✨</div>
+        <h2 class="login-title">ATELIER VESTT</h2>
+        <p class="login-subtitle">Gestão de Comissões, Metas & Arena Gamificada</p>
+      </div>
+
+      <div id="loginAlert" class="login-alert" style="display: none;">
+        <span>⚠️</span> <span id="loginAlertMsg">Usuário ou senha inválidos.</span>
+      </div>
+
+      <form id="formLogin">
+        <div class="form-group">
+          <label for="loginUsername">Usuário / Login *</label>
+          <input type="text" id="loginUsername" class="styled-input" placeholder="Ex: admin, camila, lucas" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Senha de Acesso *</label>
+          <div class="input-password-wrapper">
+            <input type="password" id="loginPassword" class="styled-input" placeholder="Digite sua senha" required autocomplete="current-password">
+            <button type="button" id="btnTogglePwd" class="btn-toggle-pwd" title="Mostrar/ocultar senha">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" id="btnSubmitLogin" class="btn btn-gold pulse-btn" style="width: 100%; margin-top: 1rem; justify-content: center; font-size: 1rem;">
+          <span>🔓</span> Entrar no Sistema
+        </button>
+      </form>
+
+      <!-- Quick Demo Access Section -->
+      <div class="demo-access-section">
+        <div class="demo-access-title">
+          <span>⚡</span> Atalhos de Acesso Rápido (Demonstração):
+        </div>
+        <div class="demo-buttons-grid" id="demoButtonsGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CADASTRAR NOVO USUÁRIO (ADMIN) -->
+  <div id="modalNewUser" class="modal-backdrop">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <span class="modal-pill">👥 NOVO USUÁRIO</span>
+          <h3>Cadastrar Acesso ao Sistema</h3>
+        </div>
+        <button class="modal-close" id="btnCloseNewUserModal">&times;</button>
+      </div>
+
+      <form id="formNewUser" class="modal-body">
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="newUserUsername">Nome de Usuário (Login) *</label>
+            <input type="text" id="newUserUsername" class="styled-input" placeholder="Ex: beatriz, consultor1" required>
+          </div>
+          <div class="form-group flex-1">
+            <label for="newUserPassword">Senha *</label>
+            <input type="password" id="newUserPassword" class="styled-input" placeholder="Senha do usuário" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="newUserName">Nome Completo do Colaborador *</label>
+          <input type="text" id="newUserName" class="styled-input" placeholder="Ex: Beatriz Lima" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="newUserRole">Nível de Acesso (Cargo) *</label>
+            <select id="newUserRole" class="styled-select" required>
+              <option value="employee">💼 Funcionário / Consultor de Vendas</option>
+              <option value="admin">🛡️ Administrador (Acesso Total)</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="newUserSellerId">Vincular a Consultor(a)</label>
+            <select id="newUserSellerId" class="styled-select">
+              <option value="">Nenhum vínculo (Geral)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="btnCancelNewUser">Cancelar</button>
+          <button type="submit" class="btn btn-gold">Criar Usuário</button>
+        </div>
+      </form>
     </div>
   </div>
 

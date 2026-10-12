@@ -1,4 +1,4 @@
-const { db, initSchema } = require('./db');
+const { db, initSchema, seedUsersIfEmpty } = require('./db');
 
 function seedDatabase() {
   console.log('🌱 Inicializando banco de dados e gerando 1 ano de histórico de vendas...');

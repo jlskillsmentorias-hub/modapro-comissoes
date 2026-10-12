@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('node:path');
-const { db, initSchema } = require('./db');
+const crypto = require('node:crypto');
+const { db, initSchema, hashPassword, verifyPassword } = require('./db');
 const { seedDatabase } = require('./seed');
 
 const app = express();
@@ -14,6 +15,74 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Ensure schema is ready
 initSchema();
 
+// Authentication Middleware
+function authenticate(req, res, next) {
+  const authHeader = req.headers.authorization;
+  const token = (authHeader && authHeader.startsWith('Bearer ')) 
+    ? authHeader.substring(7) 
+    : req.query.token;
+
+  if (!token) {
+    req.user = null;
+    return next();
+  }
+
+  try {
+    const session = db.prepare(`
+      SELECT s.token, s.expires_at, u.id, u.username, u.name, u.role, u.seller_id, u.avatar
+      FROM sessions s
+      JOIN users u ON s.user_id = u.id
+      WHERE s.token = ? AND s.expires_at > datetime('now')
+    `).get(token);
+
+    if (session) {
+      let sellerInfo = null;
+      if (session.seller_id) {
+        sellerInfo = db.prepare(`
+          SELECT id, name, nickname, avatar, color_theme, badge, base_commission_rate 
+          FROM sellers WHERE id = ?
+        `).get(session.seller_id);
+      }
+      req.user = {
+        id: session.id,
+        username: session.username,
+        name: session.name,
+        role: session.role,
+        seller_id: session.seller_id,
+        avatar: session.avatar,
+        seller_info: sellerInfo
+      };
+    } else {
+      req.user = null;
+    }
+  } catch (err) {
+    req.user = null;
+  }
+  next();
+}
+
+function requireAuth(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({ error: 'Acesso não autorizado. Por favor faça login.' });
+  }
+  next();
+}
+
+function requireAdmin(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({ error: 'Acesso não autorizado. Por favor faça login.' });
+  }
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ 
+      error: 'Acesso negado. Apenas administradores possuem permissão para realizar esta operação.',
+      user_role: req.user.role
+    });
+  }
+  next();
+}
+
+app.use(authenticate);
+
 // Helper to get default current period
 function getCurrentPeriod() {
   const now = new Date('2026-10-03T17:50:00');
@@ -21,6 +90,172 @@ function getCurrentPeriod() {
   const month = String(now.getMonth() + 1).padStart(2, '0');
   return `${year}-${month}`;
 }
+
+// ==========================================
+// AUTHENTICATION & ACCESS CONTROL ENDPOINTS
+// ==========================================
+
+// Login endpoint
+app.post('/api/auth/login', (req, res) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Informe usuário e senha.' });
+    }
+
+    const user = db.prepare('SELECT * FROM users WHERE LOWER(username) = LOWER(?)').get(username.trim());
+    if (!user) {
+      return res.status(401).json({ error: 'Usuário ou senha inválidos.' });
+    }
+
+    const isValid = verifyPassword(password, user.salt, user.password_hash);
+    if (!isValid) {
+      return res.status(401).json({ error: 'Usuário ou senha inválidos.' });
+    }
+
+    // Generate Session Token
+    const token = crypto.randomBytes(32).toString('hex');
+    db.prepare(`
+      INSERT INTO sessions (token, user_id, created_at, expires_at)
+      VALUES (?, ?, datetime('now'), datetime('now', '+7 days'))
+    `).run(token, user.id);
+
+    let sellerInfo = null;
+    if (user.seller_id) {
+      sellerInfo = db.prepare(`
+        SELECT id, name, nickname, avatar, color_theme, badge, base_commission_rate 
+        FROM sellers WHERE id = ?
+      `).get(user.seller_id);
+    }
+
+    res.json({
+      success: true,
+      token,
+      user: {
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        role: user.role,
+        seller_id: user.seller_id,
+        avatar: user.avatar,
+        seller_info: sellerInfo
+      }
+    });
+  } catch (error) {
+    console.error('Error in /api/auth/login:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Current User Info
+app.get('/api/auth/me', requireAuth, (req, res) => {
+  res.json({ user: req.user });
+});
+
+// Logout endpoint
+app.post('/api/auth/logout', (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = (authHeader && authHeader.startsWith('Bearer ')) 
+      ? authHeader.substring(7) 
+      : req.query.token;
+
+    if (token) {
+      db.prepare('DELETE FROM sessions WHERE token = ?').run(token);
+    }
+    res.json({ success: true, message: 'Sessão encerrada com sucesso.' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Demo accounts for quick-login button and evaluation
+app.get('/api/auth/demo-users', (req, res) => {
+  try {
+    const accounts = db.prepare(`
+      SELECT 
+        u.id, 
+        u.username, 
+        u.name, 
+        u.role, 
+        u.seller_id, 
+        u.avatar,
+        s.nickname AS seller_nickname,
+        s.badge AS seller_badge,
+        s.base_commission_rate
+      FROM users u
+      LEFT JOIN sellers s ON u.seller_id = s.id
+      ORDER BY CASE WHEN u.role = 'admin' THEN 0 ELSE 1 END, u.id ASC
+    `).all();
+
+    // Attach suggested passwords for demo display
+    const enriched = accounts.map(acc => ({
+      ...acc,
+      demo_password: acc.role === 'admin' ? 'admin123' : (acc.username === 'vendedor' ? 'vendedor123' : '123456')
+    }));
+
+    res.json(enriched);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// List all registered users (Admin only)
+app.get('/api/auth/users', requireAdmin, (req, res) => {
+  try {
+    const users = db.prepare(`
+      SELECT 
+        u.id, u.username, u.name, u.role, u.seller_id, u.avatar, u.created_at,
+        s.name AS seller_name, s.nickname AS seller_nickname
+      FROM users u
+      LEFT JOIN sellers s ON u.seller_id = s.id
+      ORDER BY u.id ASC
+    `).all();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Create new user (Admin only)
+app.post('/api/auth/users', requireAdmin, (req, res) => {
+  try {
+    const { username, password, name, role, seller_id } = req.body;
+    if (!username || !password || !name || !role) {
+      return res.status(400).json({ error: 'Campos obrigatórios incompletos.' });
+    }
+
+    if (!['admin', 'employee'].includes(role)) {
+      return res.status(400).json({ error: 'Nível de acesso inválido. Use "admin" ou "employee".' });
+    }
+
+    const salt = crypto.randomBytes(16).toString('hex');
+    const hash = hashPassword(password, salt);
+
+    let avatar = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80';
+    if (seller_id) {
+      const seller = db.prepare('SELECT avatar FROM sellers WHERE id = ?').get(seller_id);
+      if (seller) avatar = seller.avatar;
+    }
+
+    const insert = db.prepare(`
+      INSERT INTO users (username, password_hash, salt, name, role, seller_id, avatar, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
+    `);
+    const result = insert.run(username.trim().toLowerCase(), hash, salt, name, role, seller_id || null, avatar);
+
+    res.status(201).json({
+      success: true,
+      user_id: Number(result.lastInsertRowid),
+      message: 'Usuário cadastrado com sucesso!'
+    });
+  } catch (error) {
+    if (error.message.includes('UNIQUE constraint failed')) {
+      return res.status(409).json({ error: 'Este nome de usuário já está em uso.' });
+    }
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // 1. Dashboard Summary
 app.get('/api/dashboard', (req, res) => {
@@ -351,7 +586,7 @@ app.get('/api/campaigns', (req, res) => {
   }
 });
 
-app.post('/api/campaigns', (req, res) => {
+app.post('/api/campaigns', requireAdmin, (req, res) => {
   try {
     const { title, description, start_date, end_date, bonus_rate, category_target, color, icon } = req.body;
     if (!title || !start_date || !end_date || bonus_rate === undefined) {
@@ -381,7 +616,7 @@ app.post('/api/campaigns', (req, res) => {
   }
 });
 
-app.patch('/api/campaigns/:id/toggle', (req, res) => {
+app.patch('/api/campaigns/:id/toggle', requireAdmin, (req, res) => {
   try {
     const campaignId = req.params.id;
     const campaign = db.prepare('SELECT is_active FROM campaigns WHERE id = ?').get(campaignId);
@@ -443,7 +678,13 @@ app.get('/api/sales', (req, res) => {
 // Create new sale (Real-time calculation & gamification trigger!)
 app.post('/api/sales', (req, res) => {
   try {
-    const { seller_id, customer_name, category, total_amount, payment_method, items_count = 1 } = req.body;
+    let { seller_id, customer_name, category, total_amount, payment_method, items_count = 1 } = req.body;
+    
+    // If logged in as employee with seller_id, enforce selling as themselves
+    if (req.user && req.user.role === 'employee' && req.user.seller_id) {
+      seller_id = req.user.seller_id;
+    }
+
     if (!seller_id || !category || !total_amount) {
       return res.status(400).json({ error: 'Dados incompletos para registrar venda.' });
     }
@@ -528,8 +769,8 @@ app.get('/api/categories', (req, res) => {
   }
 });
 
-// Reset database / seed again
-app.post('/api/reset-seed', (req, res) => {
+// Reset database / seed again (Admin only)
+app.post('/api/reset-seed', requireAdmin, (req, res) => {
   try {
     seedDatabase();
     res.json({ success: true, message: 'Dados restaurados com sucesso!' });

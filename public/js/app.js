@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ranking: [],
     campaigns: [],
     dashboard: null,
-    selectedSellerForSim: null
+    selectedSellerForSim: null,
+    currentUser: null,
+    authToken: localStorage.getItem('atelier_token') || null,
+    demoUsers: []
   };
 
   const { sfx, triggerConfetti, showToast, formatCurrency } = window.gamification;
@@ -37,6 +40,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const rankingTableBody = document.getElementById('rankingTableBody');
   const campaignsGrid = document.getElementById('campaignsGrid');
   const salesTableBody = document.getElementById('salesTableBody');
+
+  // Auth & Role DOM Elements
+  const modalLogin = document.getElementById('modalLogin');
+  const formLogin = document.getElementById('formLogin');
+  const loginUsername = document.getElementById('loginUsername');
+  const loginPassword = document.getElementById('loginPassword');
+  const btnTogglePwd = document.getElementById('btnTogglePwd');
+  const loginAlert = document.getElementById('loginAlert');
+  const loginAlertMsg = document.getElementById('loginAlertMsg');
+  const demoButtonsGrid = document.getElementById('demoButtonsGrid');
+  const btnSwitchUser = document.getElementById('btnSwitchUser');
+  const btnLogout = document.getElementById('btnLogout');
+
+  const navUserCapsule = document.getElementById('navUserCapsule');
+  const navUserAvatar = document.getElementById('navUserAvatar');
+  const navUserName = document.getElementById('navUserName');
+  const navUserRole = document.getElementById('navUserRole');
+
+  const roleAccessBanner = document.getElementById('roleAccessBanner');
+  const roleBannerIcon = document.getElementById('roleBannerIcon');
+  const roleBannerText = document.getElementById('roleBannerText');
+  const roleBannerBadge = document.getElementById('roleBannerBadge');
+
+  const tabBtnUsers = document.getElementById('tabBtnUsers');
+  const usersTableBody = document.getElementById('usersTableBody');
+  const modalNewUser = document.getElementById('modalNewUser');
+  const btnOpenNewUserModal = document.getElementById('btnOpenNewUserModal');
+  const btnCloseNewUserModal = document.getElementById('btnCloseNewUserModal');
+  const btnCancelNewUser = document.getElementById('btnCancelNewUser');
+  const formNewUser = document.getElementById('formNewUser');
+  const newUserSellerId = document.getElementById('newUserSellerId');
+
+  const sellerLockNotice = document.getElementById('sellerLockNotice');
+  const filterMySalesWrapper = document.getElementById('filterMySalesWrapper');
+  const chkOnlyMySales = document.getElementById('chkOnlyMySales');
 
   // Modals
   const modalNewSale = document.getElementById('modalNewSale');
@@ -78,12 +116,277 @@ document.addEventListener('DOMContentLoaded', () => {
   const simRankDiff = document.getElementById('simRankDiff');
   const simMotivationText = document.getElementById('simMotivationText');
 
+  // API helper with authentication token injection
+  async function apiRequest(url, options = {}) {
+    options.headers = options.headers || {};
+    if (state.authToken) {
+      options.headers['Authorization'] = `Bearer ${state.authToken}`;
+    }
+    const res = await fetch(url, options);
+    if (res.status === 401) {
+      state.authToken = null;
+      state.currentUser = null;
+      localStorage.removeItem('atelier_token');
+      openModal(modalLogin);
+      throw new Error('Sessão expirada. Por favor faça login.');
+    }
+    return res;
+  }
+
   // 1. Initial Setup
   async function init() {
     setupTabs();
     setupEventListeners();
+    await checkAuthAndInit();
     await loadCategories();
     await loadInitialData();
+  }
+
+  // Authentication & Session verification
+  async function checkAuthAndInit() {
+    if (state.authToken) {
+      try {
+        const res = await fetch('/api/auth/me', {
+          headers: { 'Authorization': `Bearer ${state.authToken}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          state.currentUser = data.user;
+          closeModal(modalLogin);
+        } else {
+          state.authToken = null;
+          state.currentUser = null;
+          localStorage.removeItem('atelier_token');
+        }
+      } catch (e) {
+        state.authToken = null;
+        state.currentUser = null;
+        localStorage.removeItem('atelier_token');
+      }
+    }
+
+    await loadDemoUsers();
+
+    if (!state.currentUser) {
+      openModal(modalLogin);
+    }
+
+    applyRolePermissions();
+  }
+
+  async function loadDemoUsers() {
+    try {
+      const res = await fetch('/api/auth/demo-users');
+      if (res.ok) {
+        state.demoUsers = await res.json();
+        renderDemoButtons(state.demoUsers);
+      }
+    } catch (e) {
+      console.error('Error loading demo users:', e);
+    }
+  }
+
+  function renderDemoButtons(users) {
+    if (!demoButtonsGrid) return;
+    demoButtonsGrid.innerHTML = users.slice(0, 4).map(u => {
+      const isAdmin = u.role === 'admin';
+      return `
+        <div class="demo-user-card ${isAdmin ? 'admin-card' : 'employee-card'}" data-username="${u.username}" data-password="${u.demo_password}">
+          <img src="${u.avatar}" alt="${u.name}">
+          <div class="demo-user-info">
+            <div class="demo-user-name">${u.name}</div>
+            <div class="demo-user-sub">${isAdmin ? '🛡️ Admin • senha: ' + u.demo_password : (u.seller_nickname || 'Consultor') + ' • senha: ' + u.demo_password}</div>
+          </div>
+          <span class="demo-user-pill ${isAdmin ? 'user-badge-admin' : 'user-badge-employee'}">${isAdmin ? 'ADMIN' : 'VENDEDOR'}</span>
+        </div>
+      `;
+    }).join('');
+
+    demoButtonsGrid.querySelectorAll('.demo-user-card').forEach(card => {
+      card.addEventListener('click', async () => {
+        const uname = card.getAttribute('data-username');
+        const pwd = card.getAttribute('data-password');
+        loginUsername.value = uname;
+        loginPassword.value = pwd;
+        await handleLogin(uname, pwd);
+      });
+    });
+  }
+
+  async function handleLogin(username, password) {
+    loginAlert.style.display = 'none';
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        loginAlertMsg.textContent = data.error || 'Credenciais inválidas.';
+        loginAlert.style.display = 'flex';
+        return;
+      }
+
+      state.authToken = data.token;
+      state.currentUser = data.user;
+      localStorage.setItem('atelier_token', data.token);
+
+      closeModal(modalLogin);
+      formLogin.reset();
+      applyRolePermissions();
+      sfx.playSuccess();
+      showToast(
+        `Bem-vindo(a), ${data.user.name}!`,
+        data.user.role === 'admin' ? '🛡️ Acesso total de Administrador liberado.' : '💼 Painel do Consultor pronto para vendas!',
+        data.user.role === 'admin' ? '👑' : '✨'
+      );
+      await refreshAllData();
+    } catch (err) {
+      loginAlertMsg.textContent = 'Erro ao conectar: ' + err.message;
+      loginAlert.style.display = 'flex';
+    }
+  }
+
+  async function handleLogout() {
+    try {
+      if (state.authToken) {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${state.authToken}` }
+        });
+      }
+    } catch (e) {}
+
+    state.authToken = null;
+    state.currentUser = null;
+    localStorage.removeItem('atelier_token');
+    applyRolePermissions();
+    openModal(modalLogin);
+    showToast('Sessão Encerrada', 'Até breve!', '👋');
+  }
+
+  function applyRolePermissions() {
+    const user = state.currentUser;
+    if (!user) {
+      navUserName.textContent = 'Não conectado';
+      navUserRole.textContent = 'Visitante';
+      navUserRole.className = 'badge-role';
+      roleAccessBanner.style.display = 'none';
+      return;
+    }
+
+    roleAccessBanner.style.display = 'flex';
+    navUserName.textContent = user.name;
+    navUserAvatar.src = user.avatar || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=250&q=80';
+
+    if (user.role === 'admin') {
+      navUserAvatar.className = 'user-avatar-tiny avatar-admin';
+      navUserRole.textContent = '🛡️ Admin';
+      navUserRole.className = 'badge-role badge-admin';
+
+      roleAccessBanner.className = 'role-access-banner role-banner-admin';
+      roleBannerIcon.textContent = '🛡️';
+      roleBannerText.textContent = 'Modo Administrador Ativo: Permissão irrestrita para gerenciar metas globais, campanhas sazonais e configurações.';
+      roleBannerBadge.textContent = 'ADMINISTRADOR (TOTAL)';
+
+      // Admin controls visible
+      btnOpenNewCampaignModal.style.display = 'inline-flex';
+      btnResetSeed.style.display = 'inline-flex';
+      btnCreateCampaignTab.style.display = 'inline-flex';
+      if (tabBtnUsers) tabBtnUsers.style.display = 'inline-flex';
+      if (filterMySalesWrapper) filterMySalesWrapper.style.display = 'none';
+
+      // Sales form
+      saleSeller.disabled = false;
+      if (sellerLockNotice) sellerLockNotice.style.display = 'none';
+      simulatorSellerSelect.disabled = false;
+    } else {
+      // Employee role
+      navUserAvatar.className = 'user-avatar-tiny avatar-employee';
+      navUserRole.textContent = `💼 ${user.seller_info?.badge || 'Consultor'}`;
+      navUserRole.className = 'badge-role badge-employee';
+
+      roleAccessBanner.className = 'role-access-banner role-banner-employee';
+      roleBannerIcon.textContent = '👗';
+      roleBannerText.textContent = `Modo Consultor(a): Bem-vindo(a), ${user.name}! Acompanhe suas vendas individuais, ranking e comissões garantidas.`;
+      roleBannerBadge.textContent = 'FUNCIONÁRIO (CONSULTOR)';
+
+      // Restrict admin controls
+      btnOpenNewCampaignModal.style.display = 'none';
+      btnResetSeed.style.display = 'none';
+      btnCreateCampaignTab.style.display = 'none';
+      if (tabBtnUsers) tabBtnUsers.style.display = 'none';
+      if (filterMySalesWrapper) filterMySalesWrapper.style.display = 'flex';
+
+      // Lock sales to current seller
+      if (user.seller_id) {
+        saleSeller.value = user.seller_id;
+        saleSeller.disabled = true;
+        if (sellerLockNotice) {
+          sellerLockNotice.style.display = 'flex';
+          sellerLockNotice.innerHTML = `<span>🔒</span> Venda vinculada exclusivamente ao seu perfil (<strong>${user.name}</strong>).`;
+        }
+
+        // Simulator focuses on this employee
+        simulatorSellerSelect.value = user.seller_id;
+        if (state.ranking && state.ranking.length > 0) {
+          const sellerObj = state.ranking.find(r => r.id === user.seller_id);
+          if (sellerObj) {
+            state.selectedSellerForSim = sellerObj;
+            renderSellerProfileInSimulator();
+            updateSimulatorCalculation();
+          }
+        }
+      }
+    }
+  }
+
+  async function fetchUsersList() {
+    if (!usersTableBody || !state.currentUser || state.currentUser.role !== 'admin') return;
+    try {
+      const res = await apiRequest('/api/auth/users');
+      const users = await res.json();
+      usersTableBody.innerHTML = users.map(u => `
+        <tr>
+          <td><img src="${u.avatar}" style="width:34px; height:34px; border-radius:50%; object-fit:cover;"></td>
+          <td><strong>${u.username}</strong></td>
+          <td>${u.name}</td>
+          <td><span class="${u.role === 'admin' ? 'user-badge-admin' : 'user-badge-employee'} user-badge-role">${u.role === 'admin' ? '🛡️ Administrador' : '💼 Funcionário'}</span></td>
+          <td>${u.seller_name ? `${u.seller_name} (${u.seller_nickname})` : '<span style="color:var(--text-dim);">Geral / Diretoria</span>'}</td>
+          <td>${u.created_at ? u.created_at.substring(0, 10) : '-'}</td>
+        </tr>
+      `).join('');
+    } catch (e) {
+      console.error('Error fetching users:', e);
+    }
+  }
+
+  async function handleNewUserSubmit(e) {
+    e.preventDefault();
+    const username = document.getElementById('newUserUsername').value;
+    const password = document.getElementById('newUserPassword').value;
+    const name = document.getElementById('newUserName').value;
+    const role = document.getElementById('newUserRole').value;
+    const seller_id = document.getElementById('newUserSellerId').value ? Number(document.getElementById('newUserSellerId').value) : null;
+
+    try {
+      const res = await apiRequest('/api/auth/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, name, role, seller_id })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao criar usuário');
+
+      closeModal(modalNewUser);
+      formNewUser.reset();
+      showToast('Usuário Criado!', `Acesso criado para ${name} com perfil de ${role === 'admin' ? 'Administrador' : 'Funcionário'}.`, '🎉');
+      await fetchUsersList();
+      await loadDemoUsers();
+    } catch (err) {
+      alert('Erro: ' + err.message);
+    }
   }
 
   // Setup tab switcher
@@ -111,6 +414,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.chartsManager.sellersChart) window.chartsManager.sellersChart.resize();
           }, 100);
         }
+
+        // Fetch users if navigating to users tab
+        if (targetId === 'tab-users') {
+          fetchUsersList();
+        }
       });
     });
   }
@@ -122,9 +430,54 @@ document.addEventListener('DOMContentLoaded', () => {
       await refreshAllData();
     });
 
+    // Login Events
+    if (formLogin) {
+      formLogin.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await handleLogin(loginUsername.value.trim(), loginPassword.value);
+      });
+    }
+
+    if (btnTogglePwd) {
+      btnTogglePwd.addEventListener('click', () => {
+        const isPwd = loginPassword.type === 'password';
+        loginPassword.type = isPwd ? 'text' : 'password';
+        btnTogglePwd.textContent = isPwd ? '🙈' : '👁️';
+      });
+    }
+
+    if (btnSwitchUser) {
+      btnSwitchUser.addEventListener('click', () => {
+        openModal(modalLogin);
+      });
+    }
+
+    if (btnLogout) {
+      btnLogout.addEventListener('click', handleLogout);
+    }
+
+    // New User Modal (Admin)
+    if (btnOpenNewUserModal) {
+      btnOpenNewUserModal.addEventListener('click', () => {
+        openModal(modalNewUser);
+      });
+    }
+    if (btnCloseNewUserModal) btnCloseNewUserModal.addEventListener('click', () => closeModal(modalNewUser));
+    if (btnCancelNewUser) btnCancelNewUser.addEventListener('click', () => closeModal(modalNewUser));
+    if (formNewUser) formNewUser.addEventListener('submit', handleNewUserSubmit);
+
+    // Only My Sales filter
+    if (chkOnlyMySales) {
+      chkOnlyMySales.addEventListener('change', loadSales);
+    }
+
     // Sale Modal Triggers
     btnOpenNewSaleModal.addEventListener('click', () => {
       openModal(modalNewSale);
+      if (state.currentUser && state.currentUser.role === 'employee' && state.currentUser.seller_id) {
+        saleSeller.value = state.currentUser.seller_id;
+        saleSeller.disabled = true;
+      }
       updateSalePreview();
     });
     btnCloseSaleModal.addEventListener('click', () => closeModal(modalNewSale));
@@ -167,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnResetSeed.addEventListener('click', async () => {
       if (confirm('Deseja recarregar o banco de dados com 1 ano completo de vendas de moda e vendedores de exemplo?')) {
         try {
-          const res = await fetch('/api/reset-seed', { method: 'POST' });
+          const res = await apiRequest('/api/reset-seed', { method: 'POST' });
           const json = await res.json();
           if (json.success) {
             showToast('Banco Restaurado!', '1 ano de vendas e vendedores gerados com sucesso.', '🌱');
@@ -182,17 +535,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close modals on outside click
     window.addEventListener('click', (e) => {
       if (e.target.classList.contains('modal-backdrop')) {
+        // Prevent closing login modal by clicking outside if not logged in
+        if (e.target.id === 'modalLogin' && !state.currentUser) {
+          return;
+        }
         closeModal(e.target);
       }
     });
   }
 
   function openModal(el) {
-    el.classList.add('show');
+    if (el) el.classList.add('show');
   }
 
   function closeModal(el) {
-    el.classList.remove('show');
+    if (el) el.classList.remove('show');
   }
 
   // 2. Fetch Data
@@ -485,6 +842,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterSeller = document.getElementById('filterSeller');
     filterSeller.innerHTML = `<option value="">Todos os Vendedores</option>` +
       ranking.map(r => `<option value="${r.id}">${r.name}</option>`).join('');
+
+    if (newUserSellerId) {
+      newUserSellerId.innerHTML = `<option value="">Nenhum vínculo (Geral / Diretoria)</option>` +
+        ranking.map(r => `<option value="${r.id}">${r.name} (${r.nickname})</option>`).join('');
+    }
+
+    // If logged in as employee, lock to current seller
+    if (state.currentUser && state.currentUser.role === 'employee' && state.currentUser.seller_id) {
+      saleSeller.value = state.currentUser.seller_id;
+      saleSeller.disabled = true;
+    }
   }
 
   // 5. Seller Profile in Simulator Tab
@@ -610,7 +978,11 @@ document.addEventListener('DOMContentLoaded', () => {
   async function handleNewSaleSubmit(e) {
     e.preventDefault();
 
-    const sellerId = Number(saleSeller.value);
+    let sellerId = Number(saleSeller.value);
+    if (state.currentUser && state.currentUser.role === 'employee' && state.currentUser.seller_id) {
+      sellerId = state.currentUser.seller_id;
+    }
+
     const category = saleCategory.value;
     const customer = document.getElementById('saleCustomer').value;
     const payment = document.getElementById('salePayment').value;
@@ -618,7 +990,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsCount = Number(document.getElementById('saleItemsCount').value) || 1;
 
     try {
-      const res = await fetch('/api/sales', {
+      const res = await apiRequest('/api/sales', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -668,6 +1040,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderCampaigns(campaigns) {
+    const isAdmin = state.currentUser && state.currentUser.role === 'admin';
+
     campaignsGrid.innerHTML = campaigns.map(c => `
       <div class="campaign-card glass-panel" style="border-left: 4px solid ${c.color};">
         <span class="camp-active-badge ${c.is_active ? 'camp-status-on' : 'camp-status-off'}">
@@ -693,27 +1067,38 @@ document.addEventListener('DOMContentLoaded', () => {
               <div style="font-weight:700; color:#fff;">${formatCurrency(c.total_sales)}</div>
             </div>
           </div>
-          <button class="btn btn-glass btn-sm toggle-camp-btn" data-id="${c.id}" style="width:100%; justify-content:center;">
-            ${c.is_active ? '⏸️ Pausar Campanha' : '▶️ Reativar Campanha'}
-          </button>
+          ${isAdmin ? `
+            <button class="btn btn-glass btn-sm toggle-camp-btn" data-id="${c.id}" style="width:100%; justify-content:center;">
+              ${c.is_active ? '⏸️ Pausar Campanha' : '▶️ Reativar Campanha'}
+            </button>
+          ` : `
+            <div style="font-size:0.72rem; color:var(--text-dim); text-align:center; padding:0.4rem;">
+              🔒 Apenas administradores podem ativar ou pausar campanhas
+            </div>
+          `}
         </div>
       </div>
     `).join('');
 
-    document.querySelectorAll('.toggle-camp-btn').forEach(btn => {
-      btn.addEventListener('click', async (e) => {
-        const id = e.currentTarget.getAttribute('data-id');
-        await toggleCampaign(id);
+    if (isAdmin) {
+      document.querySelectorAll('.toggle-camp-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const id = e.currentTarget.getAttribute('data-id');
+          await toggleCampaign(id);
+        });
       });
-    });
+    }
   }
 
   async function toggleCampaign(id) {
     try {
-      const res = await fetch(`/api/campaigns/${id}/toggle`, { method: 'PATCH' });
+      const res = await apiRequest(`/api/campaigns/${id}/toggle`, { method: 'PATCH' });
+      const data = await res.json();
       if (res.ok) {
         showToast('Campanha Atualizada', 'Status alterado com sucesso.', '✨');
         await refreshAllData();
+      } else {
+        alert(data.error || 'Erro ao alterar campanha.');
       }
     } catch (e) {
       alert('Erro ao alterar campanha: ' + e.message);
@@ -733,7 +1118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const icon = document.getElementById('campIcon').value;
 
     try {
-      const res = await fetch('/api/campaigns', {
+      const res = await apiRequest('/api/campaigns', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -748,7 +1133,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       });
 
-      if (!res.ok) throw new Error('Falha ao criar campanha');
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Falha ao criar campanha');
 
       closeModal(modalNewCampaign);
       formNewCampaign.reset();
@@ -773,8 +1159,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 11. Sales Feed
   async function loadSales() {
-    const sellerId = document.getElementById('filterSeller').value;
+    let sellerId = document.getElementById('filterSeller').value;
     const category = document.getElementById('filterCategory').value;
+
+    // Filter only my sales if employee checked
+    if (chkOnlyMySales && chkOnlyMySales.checked && state.currentUser && state.currentUser.seller_id) {
+      sellerId = state.currentUser.seller_id;
+    }
 
     let url = `/api/sales?period=${state.currentPeriod}&limit=35`;
     if (sellerId) url += `&seller_id=${sellerId}`;
