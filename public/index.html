@@ -41,14 +41,6 @@
           <span>🛍️</span> Lançar Venda
         </button>
 
-        <button id="btnOpenNewCampaignModal" class="btn btn-pink">
-          <span>🎯</span> Criar Campanha
-        </button>
-
-        <button id="btnResetSeed" class="btn btn-glass" title="Restaurar dados com 1 ano de exemplo">
-          <span>🔄</span> Restaurar Dados
-        </button>
-
         <!-- User Profile Capsule -->
         <div class="user-capsule" id="navUserCapsule">
           <img id="navUserAvatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=250&q=80" alt="Avatar" class="user-avatar-tiny avatar-admin">
@@ -75,6 +67,41 @@
   <!-- Main Container -->
   <main class="main-content">
 
+    <!-- Navigation grouped by task -->
+    <nav class="tabs-nav" aria-label="Navegação principal">
+      <div class="nav-group">
+        <span class="nav-group-label">Painel</span>
+        <button class="tab-btn active" data-tab="tab-overview"><span>⌂</span> Visão geral</button>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Desempenho</span>
+        <button class="tab-btn" data-tab="tab-ranking"><span>🏆</span> Ranking</button>
+        <button class="tab-btn" data-tab="tab-simulator"><span>🎯</span> Metas e simulador</button>
+        <button class="tab-btn" data-tab="tab-analytics"><span>▥</span> Relatórios</button>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Cadastros</span>
+        <button class="tab-btn" data-tab="tab-register"><span>＋</span> Novo cadastro</button>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Consultas</span>
+        <button class="tab-btn" data-tab="tab-sales"><span>📋</span> Vendas</button>
+        <button class="tab-btn" data-tab="tab-campaigns"><span>✨</span> Campanhas</button>
+      </div>
+      <div class="nav-group nav-admin-group" id="adminNavGroup" style="display:none">
+        <span class="nav-group-label">Administração</span>
+        <button class="tab-btn" id="tabBtnUsers" style="display:none" data-tab="tab-users"><span>👥</span> Acessos</button>
+      </div>
+    </nav>
+
+    <section id="tab-overview" class="tab-content active">
+    <div class="page-heading">
+      <div>
+        <span class="page-eyebrow">ATELIER VESTT · PAINEL</span>
+        <h1>Visão geral</h1>
+        <p>Resumo da loja no período selecionado.</p>
+      </div>
+    </div>
     <!-- Active Seasonal Campaign Alert Ribbon -->
     <div id="campaignBanner" class="campaign-ribbon" style="display: none;">
       <div class="ribbon-glow"></div>
@@ -92,7 +119,7 @@
         <div class="goal-title-area">
           <span class="goal-pill">🎯 META GERAL DA EMPRESA</span>
           <h2 id="companyGoalPeriodText">Desempenho Corporativo de Vendas</h2>
-          <p class="goal-subtitle">Quando a loja bate a meta geral, todos os vendedores ganham bônus multiplicador!</p>
+          <p class="goal-subtitle">Acompanhe o progresso da equipe em relação à meta do mês.</p>
         </div>
         <div class="goal-stats-summary">
           <div class="goal-stat-item">
@@ -170,31 +197,38 @@
         </div>
       </div>
     </div>
+    </section>
 
-    <!-- Main Navigation Tabs -->
-    <div class="tabs-nav">
-      <button class="tab-btn active" data-tab="tab-ranking">
-        <span>🏆</span> Arena do Ranking & Pódio
-      </button>
-      <button class="tab-btn" data-tab="tab-analytics">
-        <span>📊</span> Gráficos & Evolução (12 Meses)
-      </button>
-      <button class="tab-btn" data-tab="tab-simulator">
-        <span>🎯</span> Metas Individuais & Simulador
-      </button>
-      <button class="tab-btn" data-tab="tab-campaigns">
-        <span>✨</span> Campanhas Sazonais
-      </button>
-      <button class="tab-btn" data-tab="tab-sales">
-        <span>📜</span> Histórico de Vendas
-      </button>
-      <button class="tab-btn" id="tabBtnUsers" style="display:none" data-tab="tab-users">
-        <span>👥</span> Usuários & Acessos
-      </button>
-    </div>
+    <section id="tab-register" class="tab-content">
+      <div class="page-heading">
+        <div>
+          <span class="page-eyebrow">ATELIER VESTT · OPERAÇÃO</span>
+          <h1>Novo cadastro</h1>
+          <p>Escolha o que deseja registrar. Listas e relatórios ficam nas Consultas.</p>
+        </div>
+      </div>
+      <div class="registration-grid">
+        <article class="registration-card glass-panel">
+          <span class="registration-icon gold-bg">🛍️</span>
+          <div>
+            <h2>Registrar venda</h2>
+            <p>Lance uma venda e veja a comissão calculada automaticamente.</p>
+          </div>
+          <button id="btnRegisterSale" class="btn btn-gold">Registrar venda</button>
+        </article>
+        <article class="registration-card glass-panel" id="campaignRegistrationCard" style="display:none">
+          <span class="registration-icon pink-bg">🎯</span>
+          <div>
+            <h2>Criar campanha</h2>
+            <p>Cadastre um acelerador sazonal para as vendas da equipe.</p>
+          </div>
+          <button id="btnCreateCampaignTab" class="btn btn-pink">Criar campanha</button>
+        </article>
+      </div>
+    </section>
 
     <!-- TAB 1: ARENA DO RANKING & PÓDIO GAMIFICADO -->
-    <section id="tab-ranking" class="tab-content active">
+    <section id="tab-ranking" class="tab-content">
       
       <!-- Gamification Podium (Top 3) -->
       <div class="podium-wrapper">
@@ -352,9 +386,6 @@
           <h2>✨ Campanhas Sazonais & Aceleradores de Comissões</h2>
           <p>Campanhas temáticas (Black Friday, Natal, Liquidações, Lançamentos de Coleção) com comissão extra para engajar a equipe.</p>
         </div>
-        <button id="btnCreateCampaignTab" class="btn btn-pink">
-          <span>➕</span> Nova Campanha Sazonal
-        </button>
       </div>
 
       <div class="campaigns-grid" id="campaignsGrid">
@@ -425,6 +456,16 @@
           </div>
         </div>
         <div class="admin-security-pill">🔒 ACESSO RESTRITO (ADMIN ONLY)</div>
+      </div>
+
+      <div class="admin-maintenance-row">
+        <div>
+          <strong>Dados de demonstração</strong>
+          <span>Recarrega o banco com dados de exemplo.</span>
+        </div>
+        <button id="btnResetSeed" class="btn btn-glass" title="Restaurar dados com 1 ano de exemplo">
+          Restaurar dados de demonstração
+        </button>
       </div>
 
       <!-- Admin Users Metrics Cards -->

@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const roleBannerBadge = document.getElementById('roleBannerBadge');
 
   const tabBtnUsers = document.getElementById('tabBtnUsers');
+  const adminNavGroup = document.getElementById('adminNavGroup');
   const usersTableBody = document.getElementById('usersTableBody');
   const modalNewUser = document.getElementById('modalNewUser');
   const btnOpenNewUserModal = document.getElementById('btnOpenNewUserModal');
@@ -124,6 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalNewCampaign = document.getElementById('modalNewCampaign');
   const btnOpenNewCampaignModal = document.getElementById('btnOpenNewCampaignModal');
   const btnCreateCampaignTab = document.getElementById('btnCreateCampaignTab');
+  const campaignRegistrationCard = document.getElementById('campaignRegistrationCard');
+  const btnRegisterSale = document.getElementById('btnRegisterSale');
   const btnCloseCampaignModal = document.getElementById('btnCloseCampaignModal');
   const btnCancelCampaign = document.getElementById('btnCancelCampaign');
   const formNewCampaign = document.getElementById('formNewCampaign');
@@ -323,10 +326,12 @@ document.addEventListener('DOMContentLoaded', () => {
       roleBannerBadge.textContent = 'ADMINISTRADOR (TOTAL)';
 
       // Admin controls visible
-      btnOpenNewCampaignModal.style.display = 'inline-flex';
-      btnResetSeed.style.display = 'inline-flex';
-      btnCreateCampaignTab.style.display = 'inline-flex';
+      if (btnOpenNewCampaignModal) btnOpenNewCampaignModal.style.display = 'inline-flex';
+      if (btnResetSeed) btnResetSeed.style.display = 'inline-flex';
+      if (btnCreateCampaignTab) btnCreateCampaignTab.style.display = 'inline-flex';
+      if (campaignRegistrationCard) campaignRegistrationCard.style.display = 'grid';
       if (tabBtnUsers) tabBtnUsers.style.display = 'inline-flex';
+      if (adminNavGroup) adminNavGroup.style.display = 'flex';
       if (filterMySalesWrapper) filterMySalesWrapper.style.display = 'none';
 
       // Sales form
@@ -345,10 +350,12 @@ document.addEventListener('DOMContentLoaded', () => {
       roleBannerBadge.textContent = 'FUNCIONÁRIO (CONSULTOR)';
 
       // Restrict admin controls
-      btnOpenNewCampaignModal.style.display = 'none';
-      btnResetSeed.style.display = 'none';
-      btnCreateCampaignTab.style.display = 'none';
+      if (btnOpenNewCampaignModal) btnOpenNewCampaignModal.style.display = 'none';
+      if (btnResetSeed) btnResetSeed.style.display = 'none';
+      if (btnCreateCampaignTab) btnCreateCampaignTab.style.display = 'none';
+      if (campaignRegistrationCard) campaignRegistrationCard.style.display = 'none';
       if (tabBtnUsers) tabBtnUsers.style.display = 'none';
+      if (adminNavGroup) adminNavGroup.style.display = 'none';
       if (filterMySalesWrapper) filterMySalesWrapper.style.display = 'flex';
 
       // Lock sales to current seller
@@ -740,14 +747,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Sale Modal Triggers
-    btnOpenNewSaleModal.addEventListener('click', () => {
+    const openSaleModal = () => {
       openModal(modalNewSale);
       if (state.currentUser && state.currentUser.role === 'employee' && state.currentUser.seller_id) {
         saleSeller.value = state.currentUser.seller_id;
         saleSeller.disabled = true;
       }
       updateSalePreview();
-    });
+    };
+    btnOpenNewSaleModal.addEventListener('click', openSaleModal);
+    if (btnRegisterSale) btnRegisterSale.addEventListener('click', openSaleModal);
     btnCloseSaleModal.addEventListener('click', () => closeModal(modalNewSale));
     btnCancelSale.addEventListener('click', () => closeModal(modalNewSale));
 
@@ -759,8 +768,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Campaign Modal Triggers
     const openCampaignModal = () => openModal(modalNewCampaign);
-    btnOpenNewCampaignModal.addEventListener('click', openCampaignModal);
-    btnCreateCampaignTab.addEventListener('click', openCampaignModal);
+    if (btnOpenNewCampaignModal) btnOpenNewCampaignModal.addEventListener('click', openCampaignModal);
+    if (btnCreateCampaignTab) btnCreateCampaignTab.addEventListener('click', openCampaignModal);
     btnCloseCampaignModal.addEventListener('click', () => closeModal(modalNewCampaign));
     btnCancelCampaign.addEventListener('click', () => closeModal(modalNewCampaign));
     formNewCampaign.addEventListener('submit', handleNewCampaignSubmit);
