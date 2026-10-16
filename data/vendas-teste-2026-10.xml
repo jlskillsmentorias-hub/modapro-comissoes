@@ -1,0 +1,1894 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atelier-vestt>
+  <exportacao>
+    <sistema>ATELIER VESTT</sistema>
+    <tipo>vendas</tipo>
+    <periodo>2026-10</periodo>
+    <moeda>BRL</moeda>
+    <gerado-em>2026-10-16T17:35:38.653Z</gerado-em>
+    <total-vendas>105</total-vendas>
+    <faturamento-total>115276.64</faturamento-total>
+    <comissao-total>7020.18</comissao-total>
+    <ticket-medio>1097.87</ticket-medio>
+    <observacao>Dados fictícios gerados para teste de sistema. Não correspondem às vendas reais cadastradas.</observacao>
+  </exportacao>
+  <vendedores>
+    <vendedor id="1">
+      <nome>Camila Rossi</nome>
+      <apelido>Musa do Luxo</apelido>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+    </vendedor>
+    <vendedor id="2">
+      <nome>Lucas Silveira</nome>
+      <apelido>Foguete Casual</apelido>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+    </vendedor>
+    <vendedor id="3">
+      <nome>Mariana Prado</nome>
+      <apelido>Chic Diamante</apelido>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+    </vendedor>
+    <vendedor id="4">
+      <nome>Beatriz Lima</nome>
+      <apelido>Alta-Costura</apelido>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+    </vendedor>
+    <vendedor id="5">
+      <nome>Rodrigo Mendes</nome>
+      <apelido>Mestre da Alfaiataria</apelido>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+    </vendedor>
+    <vendedor id="6">
+      <nome>Sofia Nogueira</nome>
+      <apelido>Revelação Fashion</apelido>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+    </vendedor>
+  </vendedores>
+  <categorias>
+    <categoria id="1">
+      <nome>Vestidos &amp; Festas</nome>
+      <icone>👗</icone>
+    </categoria>
+    <categoria id="2">
+      <nome>Alfaiataria &amp; Camisaria</nome>
+      <icone>👔</icone>
+    </categoria>
+    <categoria id="3">
+      <nome>Jeans &amp; Casual Chic</nome>
+      <icone>👖</icone>
+    </categoria>
+    <categoria id="4">
+      <nome>Casacos &amp; Tricot</nome>
+      <icone>🧥</icone>
+    </categoria>
+    <categoria id="5">
+      <nome>Moda Praia &amp; Resort</nome>
+      <icone>👙</icone>
+    </categoria>
+    <categoria id="6">
+      <nome>Calçados &amp; Bolsas de Couro</nome>
+      <icone>👠</icone>
+    </categoria>
+    <categoria id="7">
+      <nome>Acessórios &amp; Semijoias</nome>
+      <icone>💍</icone>
+    </categoria>
+  </categorias>
+  <campanhas>
+    <campanha id="1">
+      <titulo>Black Friday Fashion Glam</titulo>
+      <inicio>2025-11-20</inicio>
+      <fim>2025-11-30</fim>
+      <bonus>2.0</bonus>
+      <categoria-alvo>TODAS</categoria-alvo>
+    </campanha>
+    <campanha id="2">
+      <titulo>Natal de Gala &amp; Festas</titulo>
+      <inicio>2025-12-01</inicio>
+      <fim>2025-12-25</fim>
+      <bonus>2.5</bonus>
+      <categoria-alvo>Vestidos &amp; Festas</categoria-alvo>
+    </campanha>
+    <campanha id="3">
+      <titulo>Festival de Inverno &amp; Tricot</titulo>
+      <inicio>2026-06-01</inicio>
+      <fim>2026-07-31</fim>
+      <bonus>1.5</bonus>
+      <categoria-alvo>Casacos &amp; Tricot</categoria-alvo>
+    </campanha>
+    <campanha id="4">
+      <titulo>Primavera-Verão Alto Luxo 2027</titulo>
+      <inicio>2026-09-15</inicio>
+      <fim>2026-10-31</fim>
+      <bonus>2.0</bonus>
+      <categoria-alvo>TODAS</categoria-alvo>
+    </campanha>
+  </campanhas>
+  <vendas>
+    <venda id="1">
+      <codigo>VND-2026-90001</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Chay Suede</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1394.22</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>90.62</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-01 10:58:15</data-venda>
+    </venda>
+    <venda id="2">
+      <codigo>VND-2026-90002</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Thiago Silveira</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>260.18</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>16.91</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-01 16:18:00</data-venda>
+    </venda>
+    <venda id="3">
+      <codigo>VND-2026-90003</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Letícia Spiller</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>2523.11</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>151.39</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-01 18:32:04</data-venda>
+    </venda>
+    <venda id="7">
+      <codigo>VND-2026-90007</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Marina Ruy</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>191.05</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>10.51</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-02 14:01:51</data-venda>
+    </venda>
+    <venda id="8">
+      <codigo>VND-2026-90008</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Cláudia Alencar</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>257.95</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>14.19</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-02 16:20:04</data-venda>
+    </venda>
+    <venda id="4">
+      <codigo>VND-2026-90004</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Rodrigo Hilbert</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>198.75</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>11.53</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-02 19:20:02</data-venda>
+    </venda>
+    <venda id="6">
+      <codigo>VND-2026-90006</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Christiane Torloni</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>2240.84</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>134.45</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-02 19:20:48</data-venda>
+    </venda>
+    <venda id="5">
+      <codigo>VND-2026-90005</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Rafael Cortez</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1437.21</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>86.23</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-02 21:32:12</data-venda>
+    </venda>
+    <venda id="11">
+      <codigo>VND-2026-90011</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Bruno Gagliasso</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1016.15</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>60.97</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-03 10:09:55</data-venda>
+    </venda>
+    <venda id="12">
+      <codigo>VND-2026-90012</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Vera Fischer</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>544.98</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>35.42</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-03 11:00:46</data-venda>
+    </venda>
+    <venda id="14">
+      <codigo>VND-2026-90014</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Marina Ruy</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>397.75</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>24.66</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-03 11:15:57</data-venda>
+    </venda>
+    <venda id="9">
+      <codigo>VND-2026-90009</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Marcos Mion</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1410.71</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>77.59</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-03 16:25:20</data-venda>
+    </venda>
+    <venda id="13">
+      <codigo>VND-2026-90013</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Rodrigo Hilbert</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>412.31</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>26.80</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-03 17:00:29</data-venda>
+    </venda>
+    <venda id="10">
+      <codigo>VND-2026-90010</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Cauã Reymond</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1869.04</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>102.80</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-03 20:20:36</data-venda>
+    </venda>
+    <venda id="16">
+      <codigo>VND-2026-90016</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Camila Pitanga</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>2714.91</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>176.47</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-04 12:40:10</data-venda>
+    </venda>
+    <venda id="18">
+      <codigo>VND-2026-90018</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Caio Castro</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>197.83</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>11.87</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-04 14:58:33</data-venda>
+    </venda>
+    <venda id="15">
+      <codigo>VND-2026-90015</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Sabrina Sato</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>163.76</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>10.15</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-04 15:50:39</data-venda>
+    </venda>
+    <venda id="17">
+      <codigo>VND-2026-90017</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Chay Suede</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1773.36</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>115.27</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-04 16:48:51</data-venda>
+    </venda>
+    <venda id="19">
+      <codigo>VND-2026-90019</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Letícia Spiller</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>493.19</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>32.06</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-05 10:12:34</data-venda>
+    </venda>
+    <venda id="20">
+      <codigo>VND-2026-90020</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Rodrigo Hilbert</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>653.55</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>39.21</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-05 10:20:18</data-venda>
+    </venda>
+    <venda id="21">
+      <codigo>VND-2026-90021</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Cauã Reymond</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>1337.44</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>86.93</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-05 16:21:24</data-venda>
+    </venda>
+    <venda id="23">
+      <codigo>VND-2026-90023</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Christiane Torloni</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>499.40</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>30.96</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-06 16:08:18</data-venda>
+    </venda>
+    <venda id="22">
+      <codigo>VND-2026-90022</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Caio Castro</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>1801.18</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>104.47</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-06 19:14:09</data-venda>
+    </venda>
+    <venda id="26">
+      <codigo>VND-2026-90026</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Sabrina Sato</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>267.00</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>16.55</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-07 10:09:27</data-venda>
+    </venda>
+    <venda id="27">
+      <codigo>VND-2026-90027</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Cauã Reymond</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1202.08</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>72.12</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-07 14:24:57</data-venda>
+    </venda>
+    <venda id="24">
+      <codigo>VND-2026-90024</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Bárbara Paz</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>355.40</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>22.03</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-07 15:36:31</data-venda>
+    </venda>
+    <venda id="25">
+      <codigo>VND-2026-90025</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Paolla Oliveira</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>483.92</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>31.45</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-07 17:34:27</data-venda>
+    </venda>
+    <venda id="30">
+      <codigo>VND-2026-90030</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Cláudia Alencar</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>2376.17</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>154.45</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-08 10:44:50</data-venda>
+    </venda>
+    <venda id="28">
+      <codigo>VND-2026-90028</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Paolla Oliveira</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1181.67</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>68.54</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-08 11:07:32</data-venda>
+    </venda>
+    <venda id="29">
+      <codigo>VND-2026-90029</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Letícia Spiller</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>2168.37</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>140.94</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-08 20:18:24</data-venda>
+    </venda>
+    <venda id="31">
+      <codigo>VND-2026-90031</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Juliana Paiva</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>751.08</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>43.56</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-09 12:54:52</data-venda>
+    </venda>
+    <venda id="32">
+      <codigo>VND-2026-90032</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Sônia Braga</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>814.49</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>50.50</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-09 16:19:29</data-venda>
+    </venda>
+    <venda id="33">
+      <codigo>VND-2026-90033</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Caio Castro</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>193.54</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>12.58</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-09 20:05:08</data-venda>
+    </venda>
+    <venda id="36">
+      <codigo>VND-2026-90036</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Camila Pitanga</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>795.31</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>49.31</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-10 11:59:05</data-venda>
+    </venda>
+    <venda id="35">
+      <codigo>VND-2026-90035</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Mariana Ximenes</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1077.93</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>66.83</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-10 12:53:41</data-venda>
+    </venda>
+    <venda id="34">
+      <codigo>VND-2026-90034</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Ana Hickmann</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1278.50</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>83.10</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-10 18:50:46</data-venda>
+    </venda>
+    <venda id="38">
+      <codigo>VND-2026-90038</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Cauã Reymond</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>4</quantidade-pecas>
+      <valor-total>534.66</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>31.01</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-11 11:46:17</data-venda>
+    </venda>
+    <venda id="37">
+      <codigo>VND-2026-90037</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Isabella Fiorentino</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1589.31</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>98.54</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-11 19:51:25</data-venda>
+    </venda>
+    <venda id="39">
+      <codigo>VND-2026-90039</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Rafael Cortez</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>823.13</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>45.27</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-11 21:19:52</data-venda>
+    </venda>
+    <venda id="41">
+      <codigo>VND-2026-90041</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Fernanda Medeiros</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>242.46</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>14.55</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-12 12:28:27</data-venda>
+    </venda>
+    <venda id="42">
+      <codigo>VND-2026-90042</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Grazi Massafera</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>693.99</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>45.11</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-12 15:58:38</data-venda>
+    </venda>
+    <venda id="40">
+      <codigo>VND-2026-90040</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Marcos Mion</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>778.65</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>45.16</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-12 16:18:04</data-venda>
+    </venda>
+    <venda id="43">
+      <codigo>VND-2026-90043</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Luciana Gimenez</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>1386.92</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>85.99</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-13 12:19:47</data-venda>
+    </venda>
+    <venda id="44">
+      <codigo>VND-2026-90044</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Vera Fischer</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>660.34</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>39.62</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-13 21:37:01</data-venda>
+    </venda>
+    <venda id="45">
+      <codigo>VND-2026-90045</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Sabrina Sato</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>232.98</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>13.51</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-14 19:11:51</data-venda>
+    </venda>
+    <venda id="46">
+      <codigo>VND-2026-90046</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Luciana Gimenez</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>258.22</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>14.98</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-14 21:19:00</data-venda>
+    </venda>
+    <venda id="47">
+      <codigo>VND-2026-90047</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Fernanda Medeiros</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>645.99</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>41.99</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-15 14:42:43</data-venda>
+    </venda>
+    <venda id="48">
+      <codigo>VND-2026-90048</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Caio Castro</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1640.47</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>106.63</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-15 16:55:03</data-venda>
+    </venda>
+    <venda id="49">
+      <codigo>VND-2026-90049</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Fernanda Medeiros</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1925.73</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>105.92</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-15 18:35:58</data-venda>
+    </venda>
+    <venda id="50">
+      <codigo>VND-2026-90050</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Fernanda Medeiros</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>816.35</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>47.35</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-15 20:13:12</data-venda>
+    </venda>
+    <venda id="52">
+      <codigo>VND-2026-90052</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Letícia Spiller</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1462.68</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>84.84</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-16 12:51:17</data-venda>
+    </venda>
+    <venda id="51">
+      <codigo>VND-2026-90051</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Fernanda Medeiros</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1807.39</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>108.44</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-16 20:46:55</data-venda>
+    </venda>
+    <venda id="54">
+      <codigo>VND-2026-90054</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Grazi Massafera</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1168.51</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>75.95</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-17 10:07:41</data-venda>
+    </venda>
+    <venda id="55">
+      <codigo>VND-2026-90055</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Patrícia Poeta</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1138.28</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>73.99</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-17 12:59:27</data-venda>
+    </venda>
+    <venda id="53">
+      <codigo>VND-2026-90053</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Deborah Secco</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1097.72</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>71.35</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-17 14:43:32</data-venda>
+    </venda>
+    <venda id="57">
+      <codigo>VND-2026-90057</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Rodrigo Hilbert</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>901.26</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>55.88</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-17 16:54:22</data-venda>
+    </venda>
+    <venda id="56">
+      <codigo>VND-2026-90056</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Bárbara Paz</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>4</quantidade-pecas>
+      <valor-total>1112.73</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>66.76</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-17 20:12:35</data-venda>
+    </venda>
+    <venda id="62">
+      <codigo>VND-2026-90062</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Marina Ruy</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1326.02</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>72.93</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-18 11:59:01</data-venda>
+    </venda>
+    <venda id="59">
+      <codigo>VND-2026-90059</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Rodrigo Hilbert</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>201.12</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>13.07</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-18 16:16:11</data-venda>
+    </venda>
+    <venda id="58">
+      <codigo>VND-2026-90058</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Sônia Braga</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>1660.66</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>99.64</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-18 20:54:38</data-venda>
+    </venda>
+    <venda id="60">
+      <codigo>VND-2026-90060</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Patrícia Poeta</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>2334.04</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>135.37</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-18 21:03:18</data-venda>
+    </venda>
+    <venda id="61">
+      <codigo>VND-2026-90061</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Cláudia Alencar</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>698.33</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>41.90</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-18 21:10:19</data-venda>
+    </venda>
+    <venda id="65">
+      <codigo>VND-2026-90065</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Mariana Ximenes</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>482.94</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>29.94</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-19 10:14:31</data-venda>
+    </venda>
+    <venda id="63">
+      <codigo>VND-2026-90063</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Paolla Oliveira</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>553.09</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>34.29</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-19 20:21:17</data-venda>
+    </venda>
+    <venda id="64">
+      <codigo>VND-2026-90064</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Cláudia Alencar</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>1779.47</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>110.33</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-19 21:24:55</data-venda>
+    </venda>
+    <venda id="66">
+      <codigo>VND-2026-90066</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Rodrigo Hilbert</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>152.99</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>9.94</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-20 20:13:25</data-venda>
+    </venda>
+    <venda id="67">
+      <codigo>VND-2026-90067</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Luciana Gimenez</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1276.54</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>82.98</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-20 21:10:15</data-venda>
+    </venda>
+    <venda id="71">
+      <codigo>VND-2026-90071</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Rafael Cortez</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>389.15</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>23.35</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-21 12:05:04</data-venda>
+    </venda>
+    <venda id="68">
+      <codigo>VND-2026-90068</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Paolla Oliveira</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>2251.29</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>123.82</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-21 18:29:38</data-venda>
+    </venda>
+    <venda id="69">
+      <codigo>VND-2026-90069</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Rodrigo Hilbert</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>2726.09</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>177.20</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-21 18:34:58</data-venda>
+    </venda>
+    <venda id="70">
+      <codigo>VND-2026-90070</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Bárbara Paz</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>2623.29</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>170.51</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-21 21:17:03</data-venda>
+    </venda>
+    <venda id="72">
+      <codigo>VND-2026-90072</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Ana Hickmann</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>1962.49</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>113.82</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-22 10:49:31</data-venda>
+    </venda>
+    <venda id="74">
+      <codigo>VND-2026-90074</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Chay Suede</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>527.63</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>32.71</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-22 13:37:16</data-venda>
+    </venda>
+    <venda id="73">
+      <codigo>VND-2026-90073</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Christiane Torloni</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>978.35</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>63.59</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-22 14:23:34</data-venda>
+    </venda>
+    <venda id="75">
+      <codigo>VND-2026-90075</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Luciana Gimenez</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>374.10</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>22.45</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-22 19:19:25</data-venda>
+    </venda>
+    <venda id="76">
+      <codigo>VND-2026-90076</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Deborah Secco</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>988.28</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>59.30</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-23 14:40:15</data-venda>
+    </venda>
+    <venda id="78">
+      <codigo>VND-2026-90078</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Bárbara Paz</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>2207.53</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>132.45</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-23 15:59:47</data-venda>
+    </venda>
+    <venda id="77">
+      <codigo>VND-2026-90077</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Sônia Braga</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>828.07</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>49.68</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-23 17:41:02</data-venda>
+    </venda>
+    <venda id="81">
+      <codigo>VND-2026-90081</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Sônia Braga</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>2188.63</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>142.26</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-24 12:50:44</data-venda>
+    </venda>
+    <venda id="82">
+      <codigo>VND-2026-90082</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Marina Ruy</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>2883.25</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>173.00</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-24 14:00:13</data-venda>
+    </venda>
+    <venda id="79">
+      <codigo>VND-2026-90079</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Isabella Fiorentino</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>584.80</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>35.09</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-24 18:52:38</data-venda>
+    </venda>
+    <venda id="80">
+      <codigo>VND-2026-90080</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Chay Suede</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>845.18</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>50.71</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-24 20:41:17</data-venda>
+    </venda>
+    <venda id="83">
+      <codigo>VND-2026-90083</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Paolla Oliveira</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>2280.93</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>136.86</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-24 21:14:27</data-venda>
+    </venda>
+    <venda id="86">
+      <codigo>VND-2026-90086</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Marina Ruy</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>4</quantidade-pecas>
+      <valor-total>1977.61</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>118.66</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-25 10:20:16</data-venda>
+    </venda>
+    <venda id="87">
+      <codigo>VND-2026-90087</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Bárbara Paz</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>582.34</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>34.94</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-25 12:41:59</data-venda>
+    </venda>
+    <venda id="85">
+      <codigo>VND-2026-90085</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Patrícia Poeta</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>408.42</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>26.55</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-25 15:24:51</data-venda>
+    </venda>
+    <venda id="84">
+      <codigo>VND-2026-90084</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Bárbara Paz</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>576.36</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>35.73</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-25 17:32:24</data-venda>
+    </venda>
+    <venda id="88">
+      <codigo>VND-2026-90088</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Patrícia Poeta</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>585.20</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>32.19</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-26 16:13:56</data-venda>
+    </venda>
+    <venda id="89">
+      <codigo>VND-2026-90089</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Vera Fischer</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>397.51</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>24.65</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-26 19:41:42</data-venda>
+    </venda>
+    <venda id="91">
+      <codigo>VND-2026-90091</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Isabella Fiorentino</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1776.41</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>103.03</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-27 19:49:29</data-venda>
+    </venda>
+    <venda id="90">
+      <codigo>VND-2026-90090</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Paolla Oliveira</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>896.62</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>53.80</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-27 20:23:05</data-venda>
+    </venda>
+    <venda id="93">
+      <codigo>VND-2026-90093</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Vera Fischer</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>4</quantidade-pecas>
+      <valor-total>1898.35</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>110.10</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-28 12:52:37</data-venda>
+    </venda>
+    <venda id="94">
+      <codigo>VND-2026-90094</codigo>
+      <vendedor-id>5</vendedor-id>
+      <vendedor>Rodrigo Mendes</vendedor>
+      <cliente>Alice Wegmann</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>746.96</valor-total>
+      <taxa-comissao-base>3.8</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.8</taxa-comissao-total>
+      <valor-comissao>43.32</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-28 16:22:02</data-venda>
+    </venda>
+    <venda id="92">
+      <codigo>VND-2026-90092</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Marina Ruy</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>859.29</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>51.56</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-28 21:34:29</data-venda>
+    </venda>
+    <venda id="97">
+      <codigo>VND-2026-90097</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Grazi Massafera</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>693.58</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>45.08</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-29 10:37:21</data-venda>
+    </venda>
+    <venda id="98">
+      <codigo>VND-2026-90098</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Isabella Fiorentino</cliente>
+      <categoria>Moda Praia &amp; Resort</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>553.23</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>33.19</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-29 13:24:08</data-venda>
+    </venda>
+    <venda id="96">
+      <codigo>VND-2026-90096</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Rafael Cortez</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>5</quantidade-pecas>
+      <valor-total>468.53</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>28.11</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-29 16:55:10</data-venda>
+    </venda>
+    <venda id="95">
+      <codigo>VND-2026-90095</codigo>
+      <vendedor-id>3</vendedor-id>
+      <vendedor>Mariana Prado</vendedor>
+      <cliente>Marina Ruy</cliente>
+      <categoria>Vestidos &amp; Festas</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>1315.85</valor-total>
+      <taxa-comissao-base>4.2</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.2</taxa-comissao-total>
+      <valor-comissao>81.58</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-29 17:49:52</data-venda>
+    </venda>
+    <venda id="99">
+      <codigo>VND-2026-90099</codigo>
+      <vendedor-id>6</vendedor-id>
+      <vendedor>Sofia Nogueira</vendedor>
+      <cliente>Sabrina Sato</cliente>
+      <categoria>Alfaiataria &amp; Camisaria</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1640.84</valor-total>
+      <taxa-comissao-base>3.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>5.5</taxa-comissao-total>
+      <valor-comissao>90.25</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-30 10:10:03</data-venda>
+    </venda>
+    <venda id="101">
+      <codigo>VND-2026-90101</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Deborah Secco</cliente>
+      <categoria>Jeans &amp; Casual Chic</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>251.78</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>16.37</valor-comissao>
+      <forma-pagamento>Cartão Crédito (3x)</forma-pagamento>
+      <data-venda>2026-10-30 17:53:45</data-venda>
+    </venda>
+    <venda id="100">
+      <codigo>VND-2026-90100</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Bruno Gagliasso</cliente>
+      <categoria>Acessórios &amp; Semijoias</categoria>
+      <quantidade-pecas>3</quantidade-pecas>
+      <valor-total>332.12</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>19.93</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-30 18:40:30</data-venda>
+    </venda>
+    <venda id="102">
+      <codigo>VND-2026-90102</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Deborah Secco</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>2</quantidade-pecas>
+      <valor-total>1682.76</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>100.97</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-31 12:07:02</data-venda>
+    </venda>
+    <venda id="104">
+      <codigo>VND-2026-90104</codigo>
+      <vendedor-id>4</vendedor-id>
+      <vendedor>Beatriz Lima</vendedor>
+      <cliente>Caio Castro</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>1761.25</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>105.68</valor-comissao>
+      <forma-pagamento>Cartão Crédito (6x)</forma-pagamento>
+      <data-venda>2026-10-31 13:01:48</data-venda>
+    </venda>
+    <venda id="103">
+      <codigo>VND-2026-90103</codigo>
+      <vendedor-id>1</vendedor-id>
+      <vendedor>Camila Rossi</vendedor>
+      <cliente>Thiago Silveira</cliente>
+      <categoria>Calçados &amp; Bolsas de Couro</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>825.26</valor-total>
+      <taxa-comissao-base>4.5</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.5</taxa-comissao-total>
+      <valor-comissao>53.64</valor-comissao>
+      <forma-pagamento>Pix (À vista)</forma-pagamento>
+      <data-venda>2026-10-31 19:51:39</data-venda>
+    </venda>
+    <venda id="105">
+      <codigo>VND-2026-90105</codigo>
+      <vendedor-id>2</vendedor-id>
+      <vendedor>Lucas Silveira</vendedor>
+      <cliente>Alice Wegmann</cliente>
+      <categoria>Casacos &amp; Tricot</categoria>
+      <quantidade-pecas>1</quantidade-pecas>
+      <valor-total>2290.01</valor-total>
+      <taxa-comissao-base>4.0</taxa-comissao-base>
+      <campanha-id>4</campanha-id>
+      <campanha>Primavera-Verão Alto Luxo 2027</campanha>
+      <bonus-campanha>2.0</bonus-campanha>
+      <taxa-comissao-total>6.0</taxa-comissao-total>
+      <valor-comissao>137.40</valor-comissao>
+      <forma-pagamento>Cartão Débito</forma-pagamento>
+      <data-venda>2026-10-31 20:47:47</data-venda>
+    </venda>
+  </vendas>
+</atelier-vestt>

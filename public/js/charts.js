@@ -43,12 +43,12 @@ class ChartsManager {
           {
             label: 'Faturamento Total (R$)',
             data: salesValues,
-            borderColor: '#f59e0b',
-            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            borderColor: '#0071e3',
+            backgroundColor: 'rgba(0, 113, 227, 0.08)',
             fill: true,
             tension: 0.35,
-            borderWidth: 3,
-            pointBackgroundColor: '#fbbf24',
+            borderWidth: 2.5,
+            pointBackgroundColor: '#0071e3',
             pointRadius: 5,
             yAxisID: 'y'
           },
@@ -77,8 +77,8 @@ class ChartsManager {
           legend: {
             position: 'top',
             labels: {
-              color: '#cbd5e1',
-              font: { family: "'Plus Jakarta Sans', sans-serif", size: 12 }
+              color: '#6e6e73',
+              font: { family: "Inter, -apple-system, BlinkMacSystemFont, sans-serif", size: 12 }
             }
           },
           tooltip: {
@@ -97,16 +97,16 @@ class ChartsManager {
         },
         scales: {
           x: {
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-            ticks: { color: '#94a3b8', font: { size: 11 } }
+            grid: { color: 'rgba(0, 0, 0, 0.06)' },
+            ticks: { color: '#86868b', font: { size: 11 } }
           },
           y: {
             type: 'linear',
             display: true,
             position: 'left',
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            grid: { color: 'rgba(0, 0, 0, 0.06)' },
             ticks: {
-              color: '#f59e0b',
+              color: '#0071e3',
               callback: value => 'R$ ' + (value / 1000).toFixed(0) + 'k'
             }
           },
@@ -154,7 +154,7 @@ class ChartsManager {
         datasets: [{
           data: data,
           backgroundColor: colors,
-          borderColor: '#111827',
+          borderColor: '#ffffff',
           borderWidth: 3,
           hoverOffset: 8
         }]
@@ -166,8 +166,8 @@ class ChartsManager {
           legend: {
             position: 'right',
             labels: {
-              color: '#cbd5e1',
-              font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 },
+              color: '#6e6e73',
+              font: { family: "Inter, -apple-system, BlinkMacSystemFont, sans-serif", size: 11 },
               boxWidth: 14,
               padding: 10
             }
@@ -218,8 +218,8 @@ class ChartsManager {
           {
             label: 'Meta do Mês',
             data: targets,
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            borderColor: 'rgba(255, 255, 255, 0.3)',
+            backgroundColor: 'rgba(0, 0, 0, 0.06)',
+            borderColor: 'rgba(0, 0, 0, 0.08)',
             borderWidth: 1,
             borderRadius: 6
           }
@@ -230,7 +230,7 @@ class ChartsManager {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            labels: { color: '#94a3b8' }
+            labels: { color: '#6e6e73' }
           },
           tooltip: {
             backgroundColor: 'rgba(17, 24, 39, 0.95)',
@@ -244,12 +244,12 @@ class ChartsManager {
         scales: {
           x: {
             grid: { display: false },
-            ticks: { color: '#cbd5e1' }
+            ticks: { color: '#6e6e73' }
           },
           y: {
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            grid: { color: 'rgba(0, 0, 0, 0.06)' },
             ticks: {
-              color: '#94a3b8',
+              color: '#86868b',
               callback: value => 'R$ ' + (value / 1000).toFixed(0) + 'k'
             }
           }

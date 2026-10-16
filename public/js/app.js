@@ -330,8 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnResetSeed) btnResetSeed.style.display = 'inline-flex';
       if (btnCreateCampaignTab) btnCreateCampaignTab.style.display = 'inline-flex';
       if (campaignRegistrationCard) campaignRegistrationCard.style.display = 'grid';
-      if (tabBtnUsers) tabBtnUsers.style.display = 'inline-flex';
-      if (adminNavGroup) adminNavGroup.style.display = 'flex';
+      if (adminNavGroup) adminNavGroup.hidden = false;
       if (filterMySalesWrapper) filterMySalesWrapper.style.display = 'none';
 
       // Sales form
@@ -354,8 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnResetSeed) btnResetSeed.style.display = 'none';
       if (btnCreateCampaignTab) btnCreateCampaignTab.style.display = 'none';
       if (campaignRegistrationCard) campaignRegistrationCard.style.display = 'none';
-      if (tabBtnUsers) tabBtnUsers.style.display = 'none';
-      if (adminNavGroup) adminNavGroup.style.display = 'none';
+      if (adminNavGroup) adminNavGroup.hidden = true;
       if (filterMySalesWrapper) filterMySalesWrapper.style.display = 'flex';
 
       // Lock sales to current seller
@@ -441,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div style="display:flex; align-items:center; gap:0.65rem;">
               <img src="${u.avatar}" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border: 2px solid ${u.role === 'admin' ? 'var(--gold-500)' : 'var(--cyan-500)'};">
               <div>
-                <strong style="color: #fff; display:block;">@${u.username}</strong>
+                <strong style="color: #1d1d1f; display:block;">@${u.username}</strong>
                 ${isSelf ? '<span style="font-size:0.65rem; color:var(--gold-400); font-weight:700;">● VOCÊ (SESSÃO ATUAL)</span>' : ''}
               </div>
             </div>
@@ -1077,7 +1075,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </td>
           <td><span class="level-tag">${seller.level}</span></td>
-          <td><strong style="color: #fff;">${formatCurrency(seller.total_sales)}</strong></td>
+          <td><strong style="color: #1d1d1f;">${formatCurrency(seller.total_sales)}</strong></td>
           <td>${formatCurrency(seller.goal.target)}</td>
           <td>
             <div style="display:flex; align-items:center; gap:0.5rem;">
@@ -1146,7 +1144,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="profile-card-top">
         <img src="${s.avatar}" class="profile-avatar-big" alt="${s.name}">
         <div>
-          <h3 style="color:#fff; font-size:1.3rem;">${s.name}</h3>
+          <h3 style="color:#1d1d1f; font-size:1.3rem;">${s.name}</h3>
           <div style="color:var(--gold-400); font-size:0.85rem; font-weight:600;">${s.nickname}</div>
           <span class="level-tag" style="margin-top:0.35rem;">${s.level}</span>
         </div>
@@ -1346,7 +1344,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div style="text-align:right;">
               <div style="font-size:0.75rem; color:var(--text-muted);">VENDAS GERADAS</div>
-              <div style="font-weight:700; color:#fff;">${formatCurrency(c.total_sales)}</div>
+              <div style="font-weight:700; color:#1d1d1f;">${formatCurrency(c.total_sales)}</div>
             </div>
           </div>
           ${isAdmin ? `
@@ -1507,7 +1505,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div style="display:flex; align-items:center; gap:1.2rem; margin-bottom:1.5rem;">
           <img src="${data.seller.avatar}" style="width:72px; height:72px; border-radius:50%; object-fit:cover; border:3px solid var(--gold-400);">
           <div>
-            <h4 style="font-size:1.25rem; color:#fff;">${data.seller.name}</h4>
+            <h4 style="font-size:1.25rem; color:#1d1d1f;">${data.seller.name}</h4>
             <div style="color:var(--gold-400); font-size:0.85rem; font-weight:600;">${data.seller.nickname}</div>
             <div style="color:var(--text-muted); font-size:0.8rem;">Admissão: ${data.seller.hire_date} • Taxa Base: ${data.seller.base_commission_rate}%</div>
           </div>
@@ -1516,7 +1514,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; margin-bottom:1.5rem;">
           <div style="background:rgba(0,0,0,0.3); padding:0.9rem; border-radius:12px; border:1px solid var(--border-glass);">
             <div style="font-size:0.75rem; color:var(--text-muted);">VENDAS NO MÊS</div>
-            <div style="font-size:1.2rem; font-weight:800; color:#fff;">${formatCurrency(data.total_sales)}</div>
+            <div style="font-size:1.2rem; font-weight:800; color:#1d1d1f;">${formatCurrency(data.total_sales)}</div>
           </div>
           <div style="background:rgba(0,0,0,0.3); padding:0.9rem; border-radius:12px; border:1px solid var(--border-glass);">
             <div style="font-size:0.75rem; color:var(--text-muted);">COMISSÃO GANHA</div>
@@ -1530,11 +1528,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
           <div>
-            <h5 style="color:#fff; margin-bottom:0.75rem; font-family:var(--font-serif);">👗 Mix de Peças Mais Vendidas</h5>
+            <h5 style="color:#1d1d1f; margin-bottom:0.75rem; font-family:var(--font-serif);">👗 Mix de Peças Mais Vendidas</h5>
             ${catsHtml || '<p style="color:var(--text-muted)">Nenhuma venda ainda.</p>'}
           </div>
           <div>
-            <h5 style="color:#fff; margin-bottom:0.75rem; font-family:var(--font-serif);">⚡ Últimas Comissões Creditadas</h5>
+            <h5 style="color:#1d1d1f; margin-bottom:0.75rem; font-family:var(--font-serif);">⚡ Últimas Comissões Creditadas</h5>
             ${recentSalesHtml || '<p style="color:var(--text-muted)">Sem registros recentes.</p>'}
           </div>
         </div>
